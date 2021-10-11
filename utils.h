@@ -85,7 +85,7 @@ class StringUtils {
 
         bool allAlphaDigitEmailSpecial() {
             for(char c : test){
-                if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') &&
+                if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') && (c != '@') && (c != '.') &&
                    (c != '!') && (c != '#') && (c != '$') && (c != '%') && (c != '&') && (c != '\'') &&
                    (c != '*') && (c != '+') && (c != '-') && (c != '/') && (c != '=') && (c != '?') &&
                    (c != '^') && (c != '_') && (c != '`') && (c != '{') && (c != '|') && (c != '}') && (c != '~'))
@@ -112,7 +112,7 @@ class StringUtils {
         }
 
         bool hasAt() {
-            for(char c : test) {
+            for(char c : test){
                 if(c == '@')
                     return true;
             }
