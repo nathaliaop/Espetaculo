@@ -10,6 +10,8 @@ using namespace std;
 
 vector<Participante> participanteVector = {};
 
+fstream banco;
+
 void adicionarParticipante() {
     Matricula matricula;
     Nome nome;
@@ -103,7 +105,19 @@ void adicionarParticipante() {
             break;
         }
     }
-    if(!found) participanteVector.push_back(participante);
+    if(!found) {participanteVector.push_back(participante);/*int j = participanteVector.size() - 1;
+    banco.open("banco.txt", ios::out);
+        if(banco.is_open()) {
+            banco << participante.getMatricula().getValor();
+            banco << participante.getNome().getValor();
+            banco << participante.getSobrenome().getValor();
+            banco << participante.getEmail().getValor();
+            banco << participante.getTelefone().getValor();
+            banco << participante.getSenha().getValor();
+            banco << participante.getCargo().getValor();
+        }
+        banco.close();*/
+    }
    cout << "====================================" << endl;
 }
 
@@ -215,8 +229,8 @@ void editarDadosPessoais(string inputMatricula) {
 
     bool found = false;
 
-    Participante participante;
-    participante.setMatricula(matricula);
+    /*Participante participante;
+    participante.setMatricula(matricula);*/
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
             found = true;
@@ -233,8 +247,14 @@ void editarDadosPessoais(string inputMatricula) {
    cout << "====================================" << endl;
 }
 
-void excluirParticipante() {
-    cout << "oi" << endl;
+void excluirParticipante(string inputMatricula) {
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+        if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
+            participanteVector.erase (participanteVector.begin() + i);
+            cout << "Cadastro excluído com sucesso" << endl;
+            break;
+        }
+    }
 }
 
 void criarPeca() {
@@ -288,7 +308,6 @@ void excluirSala() {
 
 void participanteAutenticado(string inputMatricula){
     int option;
-
     do {
         cout << "Sua matrícula é: " << inputMatricula << endl;
         cout << "1 - Visualizar dados pessoais" << endl;
@@ -316,7 +335,7 @@ void participanteAutenticado(string inputMatricula){
                     break;
             case 2: editarDadosPessoais(inputMatricula);
                     break;
-            case 3: excluirParticipante();
+            case 3: excluirParticipante(inputMatricula);
                     break;
             case 4: criarPeca();
                     break;
@@ -343,7 +362,7 @@ void participanteAutenticado(string inputMatricula){
             case 15: excluirSala();
                     break;
         }
-    } while(option != 16);
+    } while(option != 16 && option != 3);
 }
 
 void autenticarParticipante() {
@@ -411,6 +430,37 @@ void listarSala() {
 }
 
 int main() {
+    /*banco.open("banco.txt", ios::in);
+if(banco.is_open()) {
+    string line;
+    int i = 0;
+    while(getline(banco, line)) {
+        Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+        Nome nome;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+                Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+                Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+                Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+                Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+                Matricula matricula;
+        matricula.setValor(line);
+        participanteVector[i].setMatricula(matricula);
+        i++;
+    }
+    banco.close();
+}*/
+
     int option;
 
     do {
