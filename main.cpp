@@ -257,8 +257,80 @@ void excluirParticipante(string inputMatricula) {
     }
 }
 
-void criarPeca() {
-    cout << "oi" << endl;
+void criarPeca(string inputMatricula) {
+    /*Codigo codigo;
+    Nome nome;
+    Tipo tipo;
+    Classificação classificação;
+    char inputCodigo[80], inputNome[80], inputTipo[80], inputClassificacao[80];
+    cin.ignore();
+    cout << "Insira os dados da peça" << endl;
+    cout << "====================================" << endl;
+    cout << "Codigo: ";
+    cin.getline(inputCodigo,sizeof(inputCodigo));
+    try{
+        codigo.setValor(string(inputCodigo));
+    }
+    catch(invalid_argument &exp){
+        cout << "Codigo no formato LLDDD no qual L é letra maiúscula e D é dígito" << endl;
+        return;
+    }
+    cout << "Nome: ";
+    cin.getline(inputNome,sizeof(inputNome));
+    try{
+        nome.setValor(string(inputNome));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do nome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+    cout << "Tipo: ";
+    cin.getline(inputTipo,sizeof(inputTipo));
+    try{
+        tipo.setValor(string(inputTipo));
+    }
+    catch(invalid_argument &exp){
+        cout << "Insira um tipo válido como auto, drama ou farsa" << endl;
+        return;
+    }
+    cout << "Classificação: ";
+    cin.getline(inputClassificacao,sizeof(inputClassificacao));
+    try{
+        Classificacao.setValor(string(inputClassificacao));
+    }
+    catch(invalid_argument &exp){
+        cout << "Insira um tipo válido como livre, 10 ou 12" << endl;
+        return;
+    }
+
+    bool found = false;
+
+    Peca peca;
+    peca.setCodigo(codigo);
+    peca.setNome(nome);
+    peca.setTipo(tipo);
+    peca.setClassificacao(classificacao);
+    for(int i = 0; (unsigned)i < pecaVector.size(); i++){
+        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
+            found = true;
+            cout << "Matrícula já cadastrada" << endl;
+            break;
+        }
+    }
+    if(!found) {participanteVector.push_back(participante);/*int j = participanteVector.size() - 1;
+    banco.open("banco.txt", ios::out);
+        if(banco.is_open()) {
+            banco << participante.getMatricula().getValor();
+            banco << participante.getNome().getValor();
+            banco << participante.getSobrenome().getValor();
+            banco << participante.getEmail().getValor();
+            banco << participante.getTelefone().getValor();
+            banco << participante.getSenha().getValor();
+            banco << participante.getCargo().getValor();
+        }
+        banco.close();
+    }
+   cout << "====================================" << endl;*/
 }
 
 void procurarPeca() {
@@ -337,7 +409,7 @@ void participanteAutenticado(string inputMatricula){
                     break;
             case 3: excluirParticipante(inputMatricula);
                     break;
-            case 4: criarPeca();
+            case 4: criarPeca(inputMatricula);
                     break;
             case 5: procurarPeca();
                     break;
