@@ -8,10 +8,7 @@
 
 using namespace std;
 
-const int maxParticipante = 10;
-
 vector<Participante> participanteVector = {};
-string participanteSenha[maxParticipante] = {};
 
 void adicionarParticipante() {
     char input1[80], input2[80];
@@ -24,17 +21,19 @@ void adicionarParticipante() {
     cin.getline(input2,sizeof(input2));
 
     Matricula matricula;
+    Nome nome;
+    Nome Sobrenome;
     Senha senha;
 
     try{
-        matricula.setMatricula(string(input1));
+        matricula.setValor(string(input1));
     }
     catch(invalid_argument &exp){
         cout << "Matricula precisa ter 5 dígitos distintos" << endl;                                                                               // Leitura de caracter digitado.
         return;
     }
     try{
-        senha.setSenha(string(input2));
+        senha.setValor(string(input2));
     }
     catch(invalid_argument &exp){
         cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;                                                                               // Leitura de caracter digitado.
@@ -47,7 +46,7 @@ void adicionarParticipante() {
     participante.setMatricula(matricula);
     participante.setSenha(senha);
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
-        if(participanteVector[i].getMatricula().getMatricula() == participante.getMatricula().getMatricula()) {
+        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
             found = true;
             cout << "Matrícula já cadastrada" << endl;
         }
@@ -59,7 +58,7 @@ void adicionarParticipante() {
 void listarParticipante() {
     bool found = false;
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
-        cout << participanteVector[i].getMatricula().getMatricula() << endl;
+        cout << participanteVector[i].getMatricula().getValor() << endl;
             found = true;
     }
     if(!found) cout << "No participants" << endl;
@@ -67,7 +66,66 @@ void listarParticipante() {
 
 
 void participanteAutenticado(){
-    cout << "oi" << endl;
+    int option;
+
+    do {
+        cout << "1 - Visualizar dados pessoais" << endl;
+        cout << "2 - Editar dados pessoais" << endl;
+        cout << "3 - Excluir cadastro no sistema" << endl;
+        cout << "4 - Criar peça" << endl;
+        cout << "5 - Procurar peça" << endl;
+        cout << "6 - Editar peça" << endl;
+        cout << "7 - Excluir peça" << endl;
+        cout << "8 - Criar sessão" << endl;
+        cout << "9 - Procurar sessão" << endl;
+        cout << "10 - Editar sessão" << endl;
+        cout << "11 - Excluir sessão" << endl;
+        cout << "12 - Criar sala" << endl;
+        cout << "13 - Procurar sala" << endl;
+        cout << "14 - Editar sala" << endl;
+        cout << "15 - Excluir sala" << endl;
+        cout << "16 - Retorna à tela inicial" << endl;
+        cout << "Selecione a opção >> ";
+
+        cin >> option;
+
+        switch(option) {
+            case 1: adicionarParticipante();
+                    break;
+            case 2: adicionarParticipante();
+                    break;
+            case 3: listarParticipante();
+                    break;
+            case 4: listarParticipante();
+                    break;
+            case 5: listarParticipante();
+                    break;
+            case 6: listarParticipante();
+                    break;
+                    case 7: listarParticipante();
+                    break;
+                                case 8: listarParticipante();
+                    break;
+                                case 9: listarParticipante();
+                    break;
+                                case 10: listarParticipante();
+                    break;
+                                case 11: listarParticipante();
+                    break;
+                                case 12: listarParticipante();
+                    break;
+                                case 13: listarParticipante();
+                    break;
+                                case 14: listarParticipante();
+                    break;
+
+                                case 15: listarParticipante();
+                    break;
+                                case 16: listarParticipante();
+                    break;
+
+        }
+    } while(option != 8);
 }
 
 void autenticarParticipante() {
@@ -84,14 +142,14 @@ void autenticarParticipante() {
     Senha senha;
 
     try{
-        matricula.setMatricula(string(input1));
+        matricula.setValor(string(input1));
     }
     catch(invalid_argument &exp){
         cout << "Matricula precisa ter 5 dígitos distintos" << endl;                                                                               // Leitura de caracter digitado.
         return;
     }
     try{
-        senha.setSenha(string(input2));
+        senha.setValor(string(input2));
     }
     catch(invalid_argument &exp){
         cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;                                                                               // Leitura de caracter digitado.
@@ -106,9 +164,9 @@ void autenticarParticipante() {
     bool foundSenha = false;
 
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
-       if(participanteVector[i].getMatricula().getMatricula() == participante.getMatricula().getMatricula()) {
+       if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
            foundMatricula = true;
-            if(participanteVector[i].getSenha().getSenha() == participante.getSenha().getSenha()) {
+            if(participanteVector[i].getSenha().getValor() == participante.getSenha().getValor()) {
                 foundSenha = true;
             }
         }
@@ -125,11 +183,11 @@ void autenticarParticipante() {
 }
 
 void listaPeca() {
-        cout << "oi" << endl;
+    cout << "oi" << endl;
 }
 
 void listarSessao() {
-        cout << "oi" << endl;
+    cout << "oi" << endl;
 }
 
 void listarSala() {
@@ -137,8 +195,6 @@ void listarSala() {
 }
 
 int main() {
-// --------------------------------------------------------------------------
-//Testes de dominios
     int option;
 
     do {

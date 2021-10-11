@@ -13,10 +13,10 @@ class Capacidade {
         int capacidade;
         void validar(int);
     public:
-        void setCapacidade(int capacidade);
-        int getCapacidade();
+        void setValor(int capacidade);
+        int getValor();
 };//Feito por -> 180116207
-inline int Capacidade::getCapacidade() {
+inline int Capacidade::getValor() {
     return capacidade;
 }//Feito por -> 180116207
 void Capacidade::validar(int capacidade){
@@ -24,7 +24,7 @@ void Capacidade::validar(int capacidade){
        capacidade != 400 && capacidade != 500)
         throw invalid_argument("Argumento Invalido!");
 }//Feito por -> 180116207
-void Capacidade::setCapacidade(int capacidade){
+void Capacidade::setValor(int capacidade){
     validar(capacidade);
     this->capacidade = capacidade;
 }//Feito por -> 180116207
@@ -35,10 +35,10 @@ class Cargo{
         string cargo;
         void validar(string);
     public:
-        void setCargo(string cargo);
-        string getCargo();
+        void setValor(string cargo);
+        string getValor();
 };//Feito por -> 180116207
-inline string Cargo::getCargo(){
+inline string Cargo::getValor(){
     return cargo;
 }//Feito por -> 180116207
 void Cargo::validar(string cargo){
@@ -46,7 +46,7 @@ void Cargo::validar(string cargo){
        cargo !="maquiador" && cargo !="sonoplasta" && cargo !="iluminador")
         throw invalid_argument("Argumento Invalido!");
 }//Feito por -> 180116207
-void Cargo::setCargo(string cargo){
+void Cargo::setValor(string cargo){
     validar(cargo);
     this->cargo = cargo;
 }//Feito por -> 180116207
@@ -57,10 +57,10 @@ class Classificacao{
         string classificacao;
 		void validar(string);
     public:
-        void setClassificacao(string classificacao);
-        string getClassificacao();
+        void setValor(string classificacao);
+        string getValor();
 };//Feito por -> 180116207
-inline string Classificacao::getClassificacao(){
+inline string Classificacao::getValor(){
     return classificacao;
 }//Feito por -> 180116207
 void Classificacao::validar(string classificacao){
@@ -68,7 +68,7 @@ void Classificacao::validar(string classificacao){
        classificacao !="14" && classificacao !="16" && classificacao !="18")
        throw invalid_argument("Argumento Invalido!");
 }//Feito por -> 180116207
-void Classificacao::setClassificacao(string classificacao){
+void Classificacao::setValor(string classificacao){
     validar(classificacao);
     this->classificacao = classificacao;
 }//Feito por -> 18011207
@@ -79,10 +79,10 @@ class Codigo {
         string codigo;
         void validar(string);
     public:
-        void setCodigo(string codigo);
-        string getCodigo();
+        void setValor(string codigo);
+        string getValor();
 };//Feito por -> 180116207
-inline string Codigo::getCodigo() {
+inline string Codigo::getValor() {
     return codigo;
 }//Feito por -> 180116207
 void Codigo::validar(string codigo) {
@@ -99,7 +99,7 @@ void Codigo::validar(string codigo) {
     if(!xxB.AllDigits())
         throw invalid_argument("Os quatro últimos caracteres precisam ser números!");
 }//Feito por -> 180042980
-void Codigo::setCodigo(string codigo) {
+void Codigo::setValor(string codigo) {
     validar(codigo);
     this->codigo = codigo;
 }//Feito por -> 180042980
@@ -110,10 +110,10 @@ class Data{
         string data;
         void validar(string);
     public:
-        void setData(string data);
-        string getData();
+        void setValor(string data);
+        string getValor();
 };//Feito por -> 180116207
-inline string Data::getData(){
+inline string Data::getValor(){
     return data;
 }//Feito por -> 180116207
 void Data::validar(string data){
@@ -123,7 +123,7 @@ void Data::validar(string data){
     if(!xx.isValid() || !xx.isDataInForm())
         throw invalid_argument("Data Invalida!");
 }//Feito por -> 180116207
-void Data::setData(string data){
+void Data::setValor(string data){
     validar(data);
     this->data = data;
 }//Feito por -> 180116207
@@ -134,10 +134,10 @@ private:
     string email;
     void validar(string);
 public:
-    void setEmail(string email);
-    string getEmail();
+    void setValor(string email);
+    string getValor();
 };//Feito por -> 180116207
-inline string Email::getEmail(){
+inline string Email::getValor(){
     return email;
 }//Feito por -> 180116207
 void Email::validar(string email){
@@ -149,7 +149,7 @@ void Email::validar(string email){
     if (xx.beginWith(".") || xx.endsWith(".") || xx.hasSequenceComma())
         throw invalid_argument("Ponto não pode ocorrer no início, no fim ou em sequência!");
 }//Feito por -> 180042980
-void Email::setEmail(string email){
+void Email::setValor(string email){
     validar(email);
     this->email = email;
 }//Feito por -> 180042980
@@ -159,10 +159,10 @@ class Horario{
         string horario;
         void validar(string);
     public:
-        void setHorario(string horario);
-        string getHorario();
+        void setValor(string horario);
+        string getValor();
 };//Feito por -> 180116207
-inline string Horario::getHorario(){
+inline string Horario::getValor(){
     return horario;
 }//Feito por -> 180116207
 void Horario::validar(string horario){
@@ -181,7 +181,7 @@ void Horario::validar(string horario){
     if(!xxM.equalsTo("00") && !xxM.equalsTo("15") && !xxM.equalsTo("30") && !xxM.equalsTo("45"))
         throw invalid_argument("Minuto Invalido!");
 }//Feito por -> 180116207
-void Horario::setHorario(string horario){
+void Horario::setValor(string horario){
     validar(horario);
     this->horario=horario;
 }//Feito por -> 180116207
@@ -192,10 +192,10 @@ private:
     string nome;
     void validar(string);
 public:
-    void setNome(string nome);
-    string getNome();
+    void setValor(string nome);
+    string getValor();
 };//Feito por -> 180116207
-inline string Nome::getNome(){
+inline string Nome::getValor(){
     return nome;
 }//Feito por -> 180116207
 void Nome::validar(string nome){
@@ -209,7 +209,7 @@ void Nome::validar(string nome){
     if(!xx.isFirstUpperAfterSpace() || !xx.isFirstUpper())
         throw invalid_argument("A primeira letra de cada termo precisa ser maiúscula!");
 }//Feito por -> 180042980
-void Nome::setNome(string nome){
+void Nome::setValor(string nome){
     validar(nome);
     this->nome = nome;
 }//Feito por -> 180042980
@@ -219,10 +219,10 @@ private:
     string matricula;
     void validar(string);
 public:
-    void setMatricula(string matricula);
-    string getMatricula();
+    void setValor(string matricula);
+    string getValor();
 };//Feito por -> 180116207
-inline string Matricula::getMatricula(){
+inline string Matricula::getValor(){
     return matricula;
 }//Feito por -> 180116207
 void Matricula::validar(string matricula) {
@@ -234,7 +234,7 @@ void Matricula::validar(string matricula) {
     if(xx.hasRepeatedchar())
         throw invalid_argument("Há caracteres repetidos!");
 }
-inline void Matricula::setMatricula(string matricula){
+inline void Matricula::setValor(string matricula){
         validar(matricula);
     this -> matricula = matricula;
 }//Feito por -> 180116207
@@ -245,10 +245,10 @@ class Senha {
         string senha;
         void validar(string);
     public:
-        void setSenha(string senha);
-        string getSenha();
+        void setValor(string senha);
+        string getValor();
 };//Feito por -> 180116207
-inline string Senha::getSenha() {
+inline string Senha::getValor() {
     return senha;
 }
 void Senha::validar(string senha){
@@ -262,7 +262,7 @@ void Senha::validar(string senha){
     if(xx.hasRepeatedchar())
         throw invalid_argument("Não pode haver caractere repetido!");
 }//Feito por -> 180042980
-void Senha::setSenha(string senha){
+void Senha::setValor(string senha){
     validar(senha);
     this->senha = senha;
 }//Feito por -> 180042980
@@ -273,10 +273,10 @@ class Telefone {
         string telefone;
         void validar(string);
     public:
-        void setTelefone(string telefone);
-        string getTelefone();
+        void setValor(string telefone);
+        string getValor();
 };//Feito por -> 180116207
-inline string Telefone::getTelefone() {
+inline string Telefone::getValor() {
     return telefone;
 }//Feito por -> 180116207
 void Telefone::validar(string telefone){
@@ -303,7 +303,7 @@ void Telefone::validar(string telefone){
        !xxDDD.equalsTo("91") && !xxDDD.equalsTo("92") && !xxDDD.equalsTo("93") && !xxDDD.equalsTo("94") && !xxDDD.equalsTo("95") && !xxDDD.equalsTo("96") && !xxDDD.equalsTo("97") && !xxDDD.equalsTo("98") && !xxDDD.equalsTo("99"))
         throw invalid_argument("DDD Invalido!");
 }//Feito por -> 180116207
-void Telefone::setTelefone(string telefone){
+void Telefone::setValor(string telefone){
     validar(telefone);
     this->telefone = telefone;
 }//Feito por -> 180116207
@@ -314,10 +314,10 @@ class Tipo {
         string tipo;
 		void validar(string);
     public:
-        void setTipo(string tipo);
-        string getTipo();
+        void setValor(string tipo);
+        string getValor();
 };//Feito por -> 180116207
-inline string Tipo::getTipo() {
+inline string Tipo::getValor() {
     return tipo;
 }//Feito por -> 180116207
 void Tipo::validar(string tipo){
@@ -326,7 +326,7 @@ void Tipo::validar(string tipo){
        tipo != "revista" )
         throw invalid_argument("Argumento Invalido!");
 }//Feito por -> 180116207
-void Tipo::setTipo(string tipo){
+void Tipo::setValor(string tipo){
     validar(tipo);
     this->tipo = tipo;
 }//Feito por -> 180116207
