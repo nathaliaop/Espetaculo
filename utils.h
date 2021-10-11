@@ -83,6 +83,17 @@ class StringUtils {
             return true;
         }
 
+        bool allAlphaDigitEmailSpecial() {
+            for(char c : test){
+                if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') &&
+                   (c != '!') && (c != '#') && (c != '$') && (c != '%') && (c != '&') && (c != '\'') &&
+                   (c != '*') && (c != '+') && (c != '-') && (c != '/') && (c != '=') && (c != '?') &&
+                   (c != '^') && (c != '_') && (c != '`') && (c != '{') && (c != '|') && (c != '}') && (c != '~'))
+                    return false;
+            }
+            return true;
+        }
+
         bool allAlphaDigitSpecial() {
             for(char c : test){
                 if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9') &&
@@ -98,6 +109,14 @@ class StringUtils {
                     return false;
             }
             return true;
+        }
+
+        bool hasAt() {
+            for(char c : test) {
+                if(c == '@')
+                    return true;
+            }
+            return false;
         }
 
         bool hasAlpha() {

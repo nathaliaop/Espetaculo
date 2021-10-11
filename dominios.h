@@ -128,7 +128,7 @@ void Data::setValor(string data){
     this->data = data;
 }//Feito por -> 180116207
 
-
+//Consertar validação de email
 class Email {
 private:
     string email;
@@ -142,6 +142,10 @@ inline string Email::getValor(){
 }//Feito por -> 180116207
 void Email::validar(string email){
     StringUtils xx (email);
+    if (!xx.hasAt())
+        throw invalid_argument("Email precisa ter @!");
+    if (!xx.allAlphaDigitEmailSpecial())
+        throw invalid_argument("Caracter inváliado no email!");
     StringUtils xxA (email.substr(0, xx.sizeBeforeAt()));
     StringUtils xxB (email.substr(xx.sizeBeforeAt() + 1, xx.sizeAfterAt()));
     if(xx.sizeBeforeAt() > 64 || xx.sizeAfterAt() > 255)

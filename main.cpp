@@ -22,21 +22,65 @@ void adicionarParticipante() {
 
     Matricula matricula;
     Nome nome;
-    Nome Sobrenome;
+    Nome sobrenome;
+    Email email;
+    Telefone telefone;
     Senha senha;
+    Cargo cargo;
 
     try{
         matricula.setValor(string(input1));
     }
     catch(invalid_argument &exp){
-        cout << "Matricula precisa ter 5 dígitos distintos" << endl;                                                                               // Leitura de caracter digitado.
+        cout << "Matricula precisa ter 5 dígitos distintos" << endl;
         return;
     }
+
+    try{
+        nome.setValor(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do nome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+
+    try{
+        sobrenome.setValor(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do sobrenome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+
+    try{
+        email.setValor(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "Email precisa conter @" << endl;
+        return;
+    }
+
+    try{
+        telefone.setValor(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "O DDD precisa ser válido e o telefone deve estar no formato (99)-999999999" << endl;
+        return;
+    }
+
     try{
         senha.setValor(string(input2));
     }
     catch(invalid_argument &exp){
-        cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;                                                                               // Leitura de caracter digitado.
+        cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;
+        return;
+    }
+
+    try{
+        cargo.setValor(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "Escolha um cargo válido como ator, figurinista ou iluminador" << endl;
         return;
     }
 
@@ -44,7 +88,12 @@ void adicionarParticipante() {
 
     Participante participante;
     participante.setMatricula(matricula);
+    participante.setNome(nome);
+    participante.setSobrenome(sobrenome);
+    participante.setEmail(email);
+    participante.setTelefone(telefone);
     participante.setSenha(senha);
+    participante.setCargo(cargo);
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
             found = true;
@@ -55,6 +104,7 @@ void adicionarParticipante() {
    cout << "====================================" << endl;
 }
 
+//Função para teste
 void listarParticipante() {
     bool found = false;
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
@@ -62,6 +112,66 @@ void listarParticipante() {
             found = true;
     }
     if(!found) cout << "No participants" << endl;
+}
+
+void visualizarDadosPessoais() {
+    cout << "oi" << endl;
+}
+
+void editarDadosPessoais() {
+    cout << "oi" << endl;
+}
+
+void excluirParticipante() {
+    cout << "oi" << endl;
+}
+
+void criarPeca() {
+    cout << "oi" << endl;
+}
+
+void procurarPeca() {
+    cout << "oi" << endl;
+}
+
+void editarPeca() {
+    cout << "oi" << endl;
+}
+
+void excluirPeca() {
+    cout << "oi" << endl;
+}
+
+void criarSessao() {
+    cout << "oi" << endl;
+}
+
+void procurarSessao() {
+    cout << "oi" << endl;
+}
+
+void editarSessao() {
+    cout << "oi" << endl;
+}
+
+void excluirSessao() {
+    cout << "oi" << endl;
+}
+
+void criarSala() {
+    cout << "oi" << endl;
+}
+
+void procurarSala() {
+    cout << "oi" << endl;
+}
+
+void editarSala() {
+    cout << "oi" << endl;
+}
+
+void excluirSala() {
+    cout << "oi" << endl;
 }
 
 
@@ -90,42 +200,38 @@ void participanteAutenticado(){
         cin >> option;
 
         switch(option) {
-            case 1: adicionarParticipante();
+            case 1: visualizarDadosPessoais();
                     break;
-            case 2: adicionarParticipante();
+            case 2: editarDadosPessoais();
                     break;
-            case 3: listarParticipante();
+            case 3: excluirParticipante();
                     break;
-            case 4: listarParticipante();
+            case 4: criarPeca();
                     break;
-            case 5: listarParticipante();
+            case 5: procurarPeca();
                     break;
-            case 6: listarParticipante();
+            case 6: editarPeca();
                     break;
-                    case 7: listarParticipante();
+            case 7: excluirPeca();
                     break;
-                                case 8: listarParticipante();
+            case 8: criarSessao();
                     break;
-                                case 9: listarParticipante();
+            case 9: procurarSessao();
                     break;
-                                case 10: listarParticipante();
+            case 10: editarSessao();
                     break;
-                                case 11: listarParticipante();
+            case 11: excluirSessao();
                     break;
-                                case 12: listarParticipante();
+            case 12: criarSala();
                     break;
-                                case 13: listarParticipante();
+            case 13: procurarSala();
                     break;
-                                case 14: listarParticipante();
+            case 14: editarSala();
                     break;
-
-                                case 15: listarParticipante();
+            case 15: excluirSala();
                     break;
-                                case 16: listarParticipante();
-                    break;
-
         }
-    } while(option != 8);
+    } while(option != 16);
 }
 
 void autenticarParticipante() {
