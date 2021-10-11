@@ -43,9 +43,9 @@ void adicionarParticipante() {
 
     bool found = false;
 
-
     Participante participante;
     participante.setMatricula(matricula);
+    participante.setSenha(senha);
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         if(participanteVector[i].getMatricula().getMatricula() == participante.getMatricula().getMatricula()) {
             found = true;
@@ -57,7 +57,6 @@ void adicionarParticipante() {
 }
 
 void listarParticipante() {
-    cout << "oi";
     bool found = false;
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         cout << participanteVector[i].getMatricula().getMatricula() << endl;
@@ -72,7 +71,57 @@ void participanteAutenticado(){
 }
 
 void autenticarParticipante() {
-    participanteAutenticado();
+    char input1[80], input2[80];
+    cin.ignore();
+    cout << "Insira seus dados" << endl;
+    cout << "====================================" << endl;
+    cout << "Matrícula: ";
+    cin.getline(input1,sizeof(input1));
+    cout << "Senha: ";
+    cin.getline(input2,sizeof(input2));
+
+    Matricula matricula;
+    Senha senha;
+
+    try{
+        matricula.setMatricula(string(input1));
+    }
+    catch(invalid_argument &exp){
+        cout << "Matricula precisa ter 5 dígitos distintos" << endl;                                                                               // Leitura de caracter digitado.
+        return;
+    }
+    try{
+        senha.setSenha(string(input2));
+    }
+    catch(invalid_argument &exp){
+        cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;                                                                               // Leitura de caracter digitado.
+        return;
+    }
+
+    Participante participante;
+    participante.setMatricula(matricula);
+    participante.setSenha(senha);
+
+    bool foundMatricula = false;
+    bool foundSenha = false;
+
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+       if(participanteVector[i].getMatricula().getMatricula() == participante.getMatricula().getMatricula()) {
+           foundMatricula = true;
+            if(participanteVector[i].getSenha().getSenha() == participante.getSenha().getSenha()) {
+                foundSenha = true;
+            }
+        }
+    }
+    if(foundSenha) participanteAutenticado();
+    else if(foundMatricula) {
+        cout << "Senha incorreta" << endl;
+        return;
+    }
+    else {
+        cout << "Participante não cadastrado!" << endl;
+        return;
+    }
 }
 
 void listaPeca() {
