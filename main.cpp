@@ -11,25 +11,6 @@ using namespace std;
 vector<Participante> participanteVector = {};
 
 void adicionarParticipante() {
-    char inputMatricula[80], inputNome[80], inputSobrenome[80], inputEmail[80], inputTelefone[80], inputSenha[80], inputCargo[80];
-    cin.ignore();
-    cout << "Insira seus dados" << endl;
-    cout << "====================================" << endl;
-    cout << "Matrícula: ";
-    cin.getline(inputMatricula,sizeof(inputMatricula));
-    cout << "Nome: ";
-    cin.getline(inputNome,sizeof(inputNome));
-    cout << "Sobrenome: ";
-    cin.getline(inputSobrenome,sizeof(inputSobrenome));
-    cout << "Email: ";
-    cin.getline(inputEmail,sizeof(inputEmail));
-    cout << "Telefone: ";
-    cin.getline(inputTelefone,sizeof(inputTelefone));
-    cout << "Senha: ";
-    cin.getline(inputSenha,sizeof(inputSenha));
-    cout << "Cargo: ";
-    cin.getline(inputCargo,sizeof(inputCargo));
-
     Matricula matricula;
     Nome nome;
     Nome sobrenome;
@@ -37,7 +18,12 @@ void adicionarParticipante() {
     Telefone telefone;
     Senha senha;
     Cargo cargo;
-
+    char inputMatricula[80], inputNome[80], inputSobrenome[80], inputEmail[80], inputTelefone[80], inputSenha[80], inputCargo[80];
+    cin.ignore();
+    cout << "Insira seus dados" << endl;
+    cout << "====================================" << endl;
+    cout << "Matrícula: ";
+    cin.getline(inputMatricula,sizeof(inputMatricula));
     try{
         matricula.setValor(string(inputMatricula));
     }
@@ -45,7 +31,8 @@ void adicionarParticipante() {
         cout << "Matricula precisa ter 5 dígitos distintos" << endl;
         return;
     }
-
+    cout << "Nome: ";
+    cin.getline(inputNome,sizeof(inputNome));
     try{
         nome.setValor(string(inputNome));
     }
@@ -53,7 +40,8 @@ void adicionarParticipante() {
         cout << "Cada palavra do nome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
         return;
     }
-
+    cout << "Sobrenome: ";
+    cin.getline(inputSobrenome,sizeof(inputSobrenome));
     try{
         sobrenome.setValor(string(inputSobrenome));
     }
@@ -61,7 +49,8 @@ void adicionarParticipante() {
         cout << "Cada palavra do sobrenome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
         return;
     }
-
+    cout << "Email: ";
+    cin.getline(inputEmail,sizeof(inputEmail));
     try{
         email.setValor(string(inputEmail));
     }
@@ -69,7 +58,8 @@ void adicionarParticipante() {
         cout << "Email precisa conter @" << endl;
         return;
     }
-
+    cout << "Telefone: ";
+    cin.getline(inputTelefone,sizeof(inputTelefone));
     try{
         telefone.setValor(string(inputTelefone));
     }
@@ -77,7 +67,8 @@ void adicionarParticipante() {
         cout << "O DDD precisa ser válido e o telefone deve estar no formato (99)-999999999" << endl;
         return;
     }
-
+    cout << "Senha: ";
+    cin.getline(inputSenha,sizeof(inputSenha));
     try{
         senha.setValor(string(inputSenha));
     }
@@ -85,7 +76,8 @@ void adicionarParticipante() {
         cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;
         return;
     }
-
+    cout << "Cargo: ";
+    cin.getline(inputCargo,sizeof(inputCargo));
     try{
         cargo.setValor(string(inputCargo));
     }
@@ -125,22 +117,120 @@ void listarParticipante() {
     if(!found) cout << "No participants" << endl;
 }
 
-void visualizarDadosPessoais() {
-    char input1[80], input2[80];
-    cin.ignore();
-    cout << "Insira seus dados" << endl;
-    cout << "====================================" << endl;
-    cout << "Matrícula: ";
-    cin.getline(input1,sizeof(input1));
-    cout << "Senha: ";
-    cin.getline(input2,sizeof(input2));
 
-    Matricula matricula;
-    Nome nome;
+//Função para tests
+void visualizarDadosPessoais(string inputMatricula) {
+    string nome, sobrenome, email, telefone, senha, cargo;
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+       if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
+            nome = participanteVector[i].getNome().getValor();
+            sobrenome = participanteVector[i].getSobrenome().getValor();
+            email = participanteVector[i].getEmail().getValor();
+            telefone = participanteVector[i].getTelefone().getValor();
+            senha = participanteVector[i].getSenha().getValor();
+            cargo = participanteVector[i].getCargo().getValor();
+            break;
+        }
+    }
+    cout << "====================================" << endl;
+    cout << "Matrícula: " << inputMatricula << endl;
+    cout << "Nome: " << nome << endl;
+    cout << "Sobrenome: " << sobrenome << endl;
+    cout << "Email: " << email << endl;
+    cout << "Telefone: " << telefone << endl;
+    cout << "Senha: " << senha << endl;
+    cout << "Cargo: " << cargo << endl;
+    cout << "====================================" << endl;
 }
 
-void editarDadosPessoais() {
-    cout << "oi" << endl;
+void editarDadosPessoais(string inputMatricula) {
+    Matricula matricula;
+    Nome nome;
+    Nome sobrenome;
+    Email email;
+    Telefone telefone;
+    Senha senha;
+    Cargo cargo;
+
+    matricula.setValor(string(inputMatricula));
+
+    char inputNome[80], inputSobrenome[80], inputEmail[80], inputTelefone[80], inputSenha[80], inputCargo[80];
+    cin.ignore();
+    cout << "Insira seus dados atualizados" << endl;
+    cout << "====================================" << endl;
+    cout << "Nome: ";
+    cin.getline(inputNome,sizeof(inputNome));
+    try{
+        nome.setValor(string(inputNome));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do nome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+    cout << "Sobrenome: ";
+    cin.getline(inputSobrenome,sizeof(inputSobrenome));
+    try{
+        sobrenome.setValor(string(inputSobrenome));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do sobrenome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+    cout << "Email: ";
+    cin.getline(inputEmail,sizeof(inputEmail));
+    try{
+        email.setValor(string(inputEmail));
+    }
+    catch(invalid_argument &exp){
+        cout << "Email precisa conter @" << endl;
+        return;
+    }
+    cout << "Telefone: ";
+    cin.getline(inputTelefone,sizeof(inputTelefone));
+    try{
+        telefone.setValor(string(inputTelefone));
+    }
+    catch(invalid_argument &exp){
+        cout << "O DDD precisa ser válido e o telefone deve estar no formato (99)-999999999" << endl;
+        return;
+    }
+    cout << "Senha: ";
+    cin.getline(inputSenha,sizeof(inputSenha));
+    try{
+        senha.setValor(string(inputSenha));
+    }
+    catch(invalid_argument &exp){
+        cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;
+        return;
+    }
+    cout << "Cargo: ";
+    cin.getline(inputCargo,sizeof(inputCargo));
+    try{
+        cargo.setValor(string(inputCargo));
+    }
+    catch(invalid_argument &exp){
+        cout << "Escolha um cargo válido como ator, figurinista ou iluminador" << endl;
+        return;
+    }
+
+    bool found = false;
+
+    Participante participante;
+    participante.setMatricula(matricula);
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+        if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
+            found = true;
+            participanteVector[i].setNome(nome);
+            participanteVector[i].setSobrenome(sobrenome);
+            participanteVector[i].setEmail(email);
+            participanteVector[i].setTelefone(telefone);
+            participanteVector[i].setSenha(senha);
+            participanteVector[i].setCargo(cargo);
+            cout << "Informações atualizadas com sucesso" << endl;
+            break;
+        }
+    }
+   cout << "====================================" << endl;
 }
 
 void excluirParticipante() {
@@ -196,11 +286,11 @@ void excluirSala() {
 }
 
 
-void participanteAutenticado(string input1){
+void participanteAutenticado(string inputMatricula){
     int option;
 
     do {
-        cout << "Sua matrícula é: " << input1 << endl;
+        cout << "Sua matrícula é: " << inputMatricula << endl;
         cout << "1 - Visualizar dados pessoais" << endl;
         cout << "2 - Editar dados pessoais" << endl;
         cout << "3 - Excluir cadastro no sistema" << endl;
@@ -222,9 +312,9 @@ void participanteAutenticado(string input1){
         cin >> option;
 
         switch(option) {
-            case 1: visualizarDadosPessoais();
+            case 1: visualizarDadosPessoais(inputMatricula);
                     break;
-            case 2: editarDadosPessoais();
+            case 2: editarDadosPessoais(inputMatricula);
                     break;
             case 3: excluirParticipante();
                     break;
@@ -257,27 +347,25 @@ void participanteAutenticado(string input1){
 }
 
 void autenticarParticipante() {
-    char input1[80], input2[80];
+    Matricula matricula;
+    Senha senha;
+    char inputMatricula[80], inputSenha[80];
     cin.ignore();
     cout << "Insira seus dados" << endl;
     cout << "====================================" << endl;
     cout << "Matrícula: ";
-    cin.getline(input1,sizeof(input1));
-    cout << "Senha: ";
-    cin.getline(input2,sizeof(input2));
-
-    Matricula matricula;
-    Senha senha;
-
+    cin.getline(inputMatricula,sizeof(inputMatricula));
     try{
-        matricula.setValor(string(input1));
+        matricula.setValor(string(inputMatricula));
     }
     catch(invalid_argument &exp){
         cout << "Matricula precisa ter 5 dígitos distintos" << endl;
         return;
     }
+    cout << "Senha: ";
+    cin.getline(inputSenha,sizeof(inputSenha));
     try{
-        senha.setValor(string(input2));
+        senha.setValor(string(inputSenha));
     }
     catch(invalid_argument &exp){
         cout << "Senha precisa conter 8 caracteres distintos tendo pelo menos uma letra, um número e um caractere especial" << endl;
@@ -299,7 +387,7 @@ void autenticarParticipante() {
             }
         }
     }
-    if(foundSenha) participanteAutenticado(input1);
+    if(foundSenha) participanteAutenticado(inputMatricula);
     else if(foundMatricula) {
         cout << "Senha incorreta!" << endl;
         return;
