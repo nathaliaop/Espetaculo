@@ -250,7 +250,7 @@ void editarDadosPessoais(string inputMatricula) {
 void excluirParticipante(string inputMatricula) {
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
-            participanteVector.erase (participanteVector.begin() + i);
+            participanteVector.erase(participanteVector.begin() + i);
             cout << "Cadastro excluído com sucesso" << endl;
             break;
         }
