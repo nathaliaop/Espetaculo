@@ -16,6 +16,7 @@ class Capacidade {
         void setValor(int capacidade);
         int getValor();
 };//Feito por -> 180116207
+
 inline int Capacidade::getValor() {
     return capacidade;
 }//Feito por -> 180116207

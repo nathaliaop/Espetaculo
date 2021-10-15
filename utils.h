@@ -2,6 +2,7 @@
 #define UTILS_H_INCLUDED
 
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -136,11 +137,9 @@ class StringUtils {
         }
 
         bool hasRepeatedchar() {
-            for (int i = 0; i < test.size(); i++){
-                for (int j = i + 1; j < test.size() - 1; j++){
-                    if (test[i] == test[j])
-                        return true;
-                }
+            sort(test.begin(), test.end());
+            for (int i = 0; i < test.size() - 1; i++){
+               if(test[i] == test[i + 1]) return true;
             }
             return false;
         }

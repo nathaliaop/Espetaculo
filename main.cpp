@@ -20,6 +20,13 @@ void adicionarParticipante() {
     Telefone telefone;
     Senha senha;
     Cargo cargo;
+
+
+    Participante participante;
+
+    bool found = false;
+
+
     char inputMatricula[80], inputNome[80], inputSobrenome[80], inputEmail[80], inputTelefone[80], inputSenha[80], inputCargo[80];
     cin.ignore();
     cout << "Insira seus dados" << endl;
@@ -29,10 +36,23 @@ void adicionarParticipante() {
     try{
         matricula.setValor(string(inputMatricula));
     }
-    catch(invalid_argument &exp){
+    catch(invalid_argument &exp) {
         cout << "Matricula precisa ter 5 dígitos distintos" << endl;
         return;
     }
+
+    participante.setMatricula(matricula);
+
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
+            found = true;
+            cout << "Matrícula já cadastrada" << endl;
+            return;
+        }
+    }
+
+
+
     cout << "Nome: ";
     cin.getline(inputNome,sizeof(inputNome));
     try{
@@ -88,23 +108,13 @@ void adicionarParticipante() {
         return;
     }
 
-    bool found = false;
 
-    Participante participante;
-    participante.setMatricula(matricula);
     participante.setNome(nome);
     participante.setSobrenome(sobrenome);
     participante.setEmail(email);
     participante.setTelefone(telefone);
     participante.setSenha(senha);
     participante.setCargo(cargo);
-    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
-        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
-            found = true;
-            cout << "Matrícula já cadastrada" << endl;
-            break;
-        }
-    }
     if(!found) {participanteVector.push_back(participante);/*int j = participanteVector.size() - 1;
     banco.open("banco.txt", ios::out);
         if(banco.is_open()) {
@@ -502,6 +512,13 @@ void listarSala() {
 }
 
 int main() {
+        Matricula matricula;
+    Nome nome;
+    Nome sobrenome;
+    Email email;
+    Telefone telefone;
+    Senha senha;
+    Cargo cargo;
     /*banco.open("banco.txt", ios::in);
 if(banco.is_open()) {
     string line;
