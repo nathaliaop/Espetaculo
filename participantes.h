@@ -261,7 +261,7 @@ void excluirParticipante(string inputMatricula) {
     }
 
     participantePecaAssociation[inputMatricula] = {};
-    
+
 }
 
 void participanteAutenticado(string inputMatricula){
@@ -303,21 +303,21 @@ void participanteAutenticado(string inputMatricula){
                     break;
             case 7: excluirPeca(inputMatricula);
                     break;
-            case 8: criarSessao();
+            case 8: criarSessao(inputMatricula);
                     break;
-            case 9: procurarSessao();
+            case 9: procurarSessao(inputMatricula);
                     break;
-            case 10: editarSessao();
+            case 10: editarSessao(inputMatricula);
                     break;
-            case 11: excluirSessao();
+            case 11: excluirSessao(inputMatricula);
                     break;
-            case 12: criarSala();
+            case 12: criarSala(inputMatricula);
                     break;
-            case 13: procurarSala();
+            case 13: procurarSala(inputMatricula);
                     break;
-            case 14: editarSala();
+            case 14: editarSala(inputMatricula);
                     break;
-            case 15: excluirSala();
+            case 15: excluirSala(inputMatricula);
                     break;
         }
     } while(option != 16 && option != 3);

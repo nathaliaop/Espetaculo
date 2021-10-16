@@ -27,10 +27,10 @@ void listarPeca() {
         cout << pecaVector[i].getTipo().getValor() << endl;
         cout << "A classificação da peça é : ";
         cout << pecaVector[i].getClassificacao().getValor() << endl;
+        cout << "====================================" << endl;
         found = true;
     }
     if(!found) cout << "Nenhuma peça cadastrada" << endl;
-    cout << "====================================" << endl;
 }
 
 void criarPeca(string inputMatricula) {
@@ -116,15 +116,15 @@ void procurarPeca(string inputMatricula) {
     cin.ignore();
     cin.getline(inputCodigo,sizeof(inputCodigo));
 
-    //Verifica se o usuário tem permissão para acessar a peça
+    //Verifica se a peça existe
     bool allowAccess = false;
 
-    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
-        if(pecaCodigo == inputCodigo) allowAccess = true;
+    for (auto peca : pecaVector) {
+        if(peca.getCodigo().getValor() == inputCodigo) allowAccess = true;
     }
 
     if(!allowAccess) {
-        cout << "Peça não existe ou você não tem autorização para ver essa peça" << endl;
+        cout << "Peça não existe" << endl;
         return;
     }
 
@@ -156,15 +156,15 @@ void editarPeca(string inputMatricula) {
     cin.ignore();
     cin.getline(inputCodigo,sizeof(inputCodigo));
 
-    //Verifica se o usuário tem permissão para acessar a peça
+    //Verifica se a peça existe
     bool allowAccess = false;
 
-    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
-        if(pecaCodigo == inputCodigo) allowAccess = true;
+    for (auto peca : pecaVector) {
+        if(peca.getCodigo().getValor() == inputCodigo) allowAccess = true;
     }
 
     if(!allowAccess) {
-        cout << "Peça não existe ou você não tem autorização para ver essa peça" << endl;
+        cout << "Peça não existe" << endl;
         return;
     }
 
@@ -224,15 +224,15 @@ void excluirPeca(string inputMatricula) {
     cin.ignore();
     cin.getline(inputCodigo,sizeof(inputCodigo));
 
-    //Verifica se o usuário tem permissão para acessar a peça
+    //Verifica se a peça existe
     bool allowAccess = false;
 
-    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
-        if(pecaCodigo == inputCodigo) allowAccess = true;
+    for (auto peca : pecaVector) {
+        if(peca.getCodigo().getValor() == inputCodigo) allowAccess = true;
     }
 
     if(!allowAccess) {
-        cout << "Você não tem autorização para ver essa peça" << endl;
+        cout << "Peça não existe" << endl;
         return;
     }
     
@@ -250,7 +250,7 @@ void excluirPeca(string inputMatricula) {
     // Apaga peça de participantePecaAssociation
     for(int i = 0; (unsigned)i < participantePecaAssociation[inputMatricula].size(); i++){
         if(participantePecaAssociation[inputMatricula][i] == inputCodigo) {
-            found = true;
+            //found = true;
             participantePecaAssociation[inputMatricula].erase(participantePecaAssociation[inputMatricula].begin() + i);
             break;
         }
