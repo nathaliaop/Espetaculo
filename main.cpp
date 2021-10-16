@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
 
 #include "dominios.h"
 #include "entidades.h"
@@ -9,10 +10,14 @@
 using namespace std;
 
 vector<Participante> participanteVector = {};
+vector<Peca> pecaVector = {};
+vector<Sessao> sessaoVector = {};
+vector<Sala> salaVector = {};
+map<string, vector<string>> participantePecaAssociation = {};
 
-fstream banco;
-
-void adicionarParticipante() {
+void criarParticipante() {
+    Participante participante;
+    
     Matricula matricula;
     Nome nome;
     Nome sobrenome;
@@ -21,19 +26,15 @@ void adicionarParticipante() {
     Senha senha;
     Cargo cargo;
 
-
-    Participante participante;
-
     bool found = false;
-
-
     char inputMatricula[80], inputNome[80], inputSobrenome[80], inputEmail[80], inputTelefone[80], inputSenha[80], inputCargo[80];
     cin.ignore();
+
     cout << "Insira seus dados" << endl;
     cout << "====================================" << endl;
     cout << "Matrícula: ";
     cin.getline(inputMatricula,sizeof(inputMatricula));
-    try{
+    try {
         matricula.setValor(string(inputMatricula));
     }
     catch(invalid_argument &exp) {
@@ -41,6 +42,7 @@ void adicionarParticipante() {
         return;
     }
 
+    // Verifica se a matrícula já foi cadastrada
     participante.setMatricula(matricula);
 
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
@@ -51,11 +53,9 @@ void adicionarParticipante() {
         }
     }
 
-
-
     cout << "Nome: ";
     cin.getline(inputNome,sizeof(inputNome));
-    try{
+    try {
         nome.setValor(string(inputNome));
     }
     catch(invalid_argument &exp){
@@ -108,25 +108,13 @@ void adicionarParticipante() {
         return;
     }
 
-
     participante.setNome(nome);
     participante.setSobrenome(sobrenome);
     participante.setEmail(email);
     participante.setTelefone(telefone);
     participante.setSenha(senha);
     participante.setCargo(cargo);
-    if(!found) {participanteVector.push_back(participante);/*int j = participanteVector.size() - 1;
-    banco.open("banco.txt", ios::out);
-        if(banco.is_open()) {
-            banco << participante.getMatricula().getValor();
-            banco << participante.getNome().getValor();
-            banco << participante.getSobrenome().getValor();
-            banco << participante.getEmail().getValor();
-            banco << participante.getTelefone().getValor();
-            banco << participante.getSenha().getValor();
-            banco << participante.getCargo().getValor();
-        }
-        banco.close();*/
+    if(!found) {participanteVector.push_back(participante);
     }
    cout << "====================================" << endl;
 }
@@ -239,8 +227,6 @@ void editarDadosPessoais(string inputMatricula) {
 
     bool found = false;
 
-    /*Participante participante;
-    participante.setMatricula(matricula);*/
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
         if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
             found = true;
@@ -268,23 +254,142 @@ void excluirParticipante(string inputMatricula) {
 }
 
 void criarPeca(string inputMatricula) {
-    /*Codigo codigo;
+    Peca peca;
+    
+    Codigo codigo;
     Nome nome;
     Tipo tipo;
-    Classificação classificação;
+    Classificacao classificacao;
+
+    bool found = false;
     char inputCodigo[80], inputNome[80], inputTipo[80], inputClassificacao[80];
     cin.ignore();
-    cout << "Insira os dados da peça" << endl;
+
+    cout << "Insira seus dados" << endl;
     cout << "====================================" << endl;
     cout << "Codigo: ";
     cin.getline(inputCodigo,sizeof(inputCodigo));
-    try{
+    try {
         codigo.setValor(string(inputCodigo));
     }
-    catch(invalid_argument &exp){
-        cout << "Codigo no formato LLDDD no qual L é letra maiúscula e D é dígito" << endl;
+    catch(invalid_argument &exp) {
+        cout << "Codigo precisa ter o formato LLDDDD (L são letras maisculas e D são dígitos)" << endl;
         return;
     }
+
+    // Verifica se o código já foi cadastrado
+    peca.setCodigo(codigo);
+
+    for(int i = 0; (unsigned)i < pecaVector.size(); i++){
+        if(pecaVector[i].getCodigo().getValor() == peca.getCodigo().getValor()) {
+            found = true;
+            cout << "Código já cadastrado" << endl;
+            return;
+        }
+    }
+
+    cout << "Nome: ";
+    cin.getline(inputNome,sizeof(inputNome));
+    try {
+        nome.setValor(string(inputNome));
+    }
+    catch(invalid_argument &exp){
+        cout << "Cada palavra do nome deve começar com letra maiúscula e ter entre 5 e 20 caracteres" << endl;
+        return;
+    }
+    cout << "Tipo: ";
+    cin.getline(inputTipo,sizeof(inputTipo));
+    try{
+        tipo.setValor(string(inputTipo));
+    }
+    catch(invalid_argument &exp){
+        cout << "Insira uma classificacao válida, como auto, drama, farsa" << endl;
+        return;
+    }
+    cout << "Classificacao: ";
+    cin.getline(inputClassificacao,sizeof(inputClassificacao));
+    try{
+        classificacao.setValor(string(inputClassificacao));
+    }
+    catch(invalid_argument &exp){
+        cout << "Insira uma classificacao válida, como livre, 10 ou 12" << endl;
+        return;
+    }
+
+    peca.setCodigo(codigo);
+    peca.setNome(nome);
+    peca.setTipo(tipo);
+    peca.setClassificacao(classificacao);
+    if(!found) {
+        pecaVector.push_back(peca);
+        participantePecaAssociation[inputMatricula].push_back(inputCodigo);
+    }
+
+   cout << "====================================" << endl;
+}
+
+void procurarPeca(string inputMatricula) {
+    cout << "Qual peça você gostaria de visualizar" << endl;
+    cout << "====================================" << endl;
+    cout << "Código: ";
+    char inputCodigo[80];
+    cin.ignore();
+    cin.getline(inputCodigo,sizeof(inputCodigo));
+
+    //Verifica se o usuário tem permissão para acessar a peça
+    bool allowAccess = false;
+
+    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
+        if(pecaCodigo == inputCodigo) allowAccess = true;
+    }
+
+    if(!allowAccess) {
+        cout << "Peça não existe ou você não tem autorização para ver essa peça" << endl;
+        return;
+    }
+
+    string nome, tipo, classificacao;
+    for(int i = 0; (unsigned)i < pecaVector.size(); i++) {
+    if(pecaVector[i].getCodigo().getValor() == inputCodigo) {
+            nome = pecaVector[i].getNome().getValor();
+            tipo = pecaVector[i].getTipo().getValor();
+            classificacao = pecaVector[i].getClassificacao().getValor();
+            break;
+        }
+    }
+    cout << "====================================" << endl;
+    cout << "Nome: " << nome << endl;
+    cout << "Tipo: " << tipo << endl;
+    cout << "Classificação: " << classificacao << endl;
+    cout << "====================================" << endl;
+}
+
+void editarPeca(string inputMatricula) {
+    Nome nome;
+    Tipo tipo;
+    Classificacao classificacao;
+
+    cout << "Qual peça você gostaria de editar" << endl;
+    cout << "====================================" << endl;
+    cout << "Código: ";
+    char inputCodigo[80],inputNome[80], inputTipo[80], inputClassificacao[80];
+    cin.ignore();
+    cin.getline(inputCodigo,sizeof(inputCodigo));
+
+    //Verifica se o usuário tem permissão para acessar a peça
+    bool allowAccess = false;
+
+    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
+        if(pecaCodigo == inputCodigo) allowAccess = true;
+    }
+
+    if(!allowAccess) {
+        cout << "Peça não existe ou você não tem autorização para ver essa peça" << endl;
+        return;
+    }
+
+    cout << "Insira os dados da peça atualizados" << endl;
+    cout << "====================================" << endl;
     cout << "Nome: ";
     cin.getline(inputNome,sizeof(inputNome));
     try{
@@ -300,59 +405,78 @@ void criarPeca(string inputMatricula) {
         tipo.setValor(string(inputTipo));
     }
     catch(invalid_argument &exp){
-        cout << "Insira um tipo válido como auto, drama ou farsa" << endl;
+        cout << "Insira um tipo válido, como livre, 10 ou 12" << endl;
         return;
     }
-    cout << "Classificação: ";
+    cout << "Classificacao: ";
     cin.getline(inputClassificacao,sizeof(inputClassificacao));
     try{
-        Classificacao.setValor(string(inputClassificacao));
+        classificacao.setValor(string(inputClassificacao));
     }
     catch(invalid_argument &exp){
-        cout << "Insira um tipo válido como livre, 10 ou 12" << endl;
+        cout << "Insira uma classificacao válida, como auto, drama, farsa" << endl;
         return;
     }
+
 
     bool found = false;
 
-    Peca peca;
-    peca.setCodigo(codigo);
-    peca.setNome(nome);
-    peca.setTipo(tipo);
-    peca.setClassificacao(classificacao);
     for(int i = 0; (unsigned)i < pecaVector.size(); i++){
-        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
+        if(pecaVector[i].getCodigo().getValor() == inputCodigo) {
             found = true;
-            cout << "Matrícula já cadastrada" << endl;
+            pecaVector[i].setNome(nome);
+            pecaVector[i].setTipo(tipo);
+            pecaVector[i].setClassificacao(classificacao);
+            cout << "Informações atualizadas com sucesso" << endl;
             break;
         }
     }
-    if(!found) {participanteVector.push_back(participante);/*int j = participanteVector.size() - 1;
-    banco.open("banco.txt", ios::out);
-        if(banco.is_open()) {
-            banco << participante.getMatricula().getValor();
-            banco << participante.getNome().getValor();
-            banco << participante.getSobrenome().getValor();
-            banco << participante.getEmail().getValor();
-            banco << participante.getTelefone().getValor();
-            banco << participante.getSenha().getValor();
-            banco << participante.getCargo().getValor();
-        }
-        banco.close();
+
+   cout << "====================================" << endl;
+}
+
+void excluirPeca(string inputMatricula) {
+    cout << "Qual peça você gostaria de excluir" << endl;
+    cout << "====================================" << endl;
+    cout << "Codigo: ";
+
+    char inputCodigo[80];
+    cin.ignore();
+    cin.getline(inputCodigo,sizeof(inputCodigo));
+
+    //Verifica se o usuário tem permissão para acessar a peça
+    bool allowAccess = false;
+
+    for (string pecaCodigo : participantePecaAssociation[inputMatricula]) {
+        if(pecaCodigo == inputCodigo) allowAccess = true;
     }
-   cout << "====================================" << endl;*/
-}
 
-void procurarPeca() {
-    cout << "oi" << endl;
-}
+    if(!allowAccess) {
+        cout << "Você não tem autorização para ver essa peça" << endl;
+        return;
+    }
+    
+    bool found = false;
 
-void editarPeca() {
-    cout << "oi" << endl;
-}
+    for(int i = 0; (unsigned)i < pecaVector.size(); i++){
+        if(pecaVector[i].getCodigo().getValor() == inputCodigo) {
+            found = true;
+            pecaVector.erase(pecaVector.begin() + i);
+            cout << "Peca excluída com sucesso" << endl;
+            break;
+        }
+    }
 
-void excluirPeca() {
-    cout << "oi" << endl;
+    // Apaga peça de participantePecaAssociation
+    for(int i = 0; (unsigned)i < participantePecaAssociation[inputMatricula].size(); i++){
+        if(participantePecaAssociation[inputMatricula][i] == inputCodigo) {
+            found = true;
+            participantePecaAssociation[inputMatricula].erase(participantePecaAssociation[inputMatricula].begin() + i);
+            break;
+        }
+    }
+
+    if(!found) cout << "Peça não cadastrada" << endl;
 }
 
 void criarSessao() {
@@ -421,11 +545,11 @@ void participanteAutenticado(string inputMatricula){
                     break;
             case 4: criarPeca(inputMatricula);
                     break;
-            case 5: procurarPeca();
+            case 5: procurarPeca(inputMatricula);
                     break;
-            case 6: editarPeca();
+            case 6: editarPeca(inputMatricula);
                     break;
-            case 7: excluirPeca();
+            case 7: excluirPeca(inputMatricula);
                     break;
             case 8: criarSessao();
                     break;
@@ -497,10 +621,25 @@ void autenticarParticipante() {
         cout << "Participante não cadastrado!" << endl;
         return;
     }
+    cout << "====================================" << endl;
 }
 
 void listarPeca() {
-    cout << "oi" << endl;
+    cout << "====================================" << endl;
+    bool found = false;
+    for(int i = 0; (unsigned)i < pecaVector.size(); i++) {
+        cout << "O código da peça é : ";
+        cout << pecaVector[i].getCodigo().getValor() << endl;
+        cout << "O nome da peça é : ";
+        cout << pecaVector[i].getNome().getValor() << endl;
+        cout << "O tipo da peça é : ";
+        cout << pecaVector[i].getTipo().getValor() << endl;
+        cout << "A classificação da peça é : ";
+        cout << pecaVector[i].getClassificacao().getValor() << endl;
+        found = true;
+    }
+    if(!found) cout << "Nenhuma peça cadastrada" << endl;
+    cout << "====================================" << endl;
 }
 
 void listarSessao() {
@@ -512,43 +651,13 @@ void listarSala() {
 }
 
 int main() {
-        Matricula matricula;
+    Matricula matricula;
     Nome nome;
     Nome sobrenome;
     Email email;
     Telefone telefone;
     Senha senha;
     Cargo cargo;
-    /*banco.open("banco.txt", ios::in);
-if(banco.is_open()) {
-    string line;
-    int i = 0;
-    while(getline(banco, line)) {
-        Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-        Nome nome;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-                Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-                Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-                Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-                Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-                Matricula matricula;
-        matricula.setValor(line);
-        participanteVector[i].setMatricula(matricula);
-        i++;
-    }
-    banco.close();
-}*/
 
     int option;
 
@@ -559,7 +668,7 @@ if(banco.is_open()) {
         cout << "4 - Listar sessões" << endl;
         cout << "5 - Listar salas" << endl;
         cout << "6 - Sair do sistema" << endl;
-                cout << "7 - Listar participantes" << endl;
+        cout << "7 - Listar participantes" << endl;
         cout << "Selecione a opção >> ";
 
         cin >> option;
@@ -567,7 +676,7 @@ if(banco.is_open()) {
         switch(option) {
             case 1: autenticarParticipante();
                     break;
-            case 2: adicionarParticipante();
+            case 2: criarParticipante();
                     break;
             case 3: listarPeca();
                     break;
@@ -575,7 +684,7 @@ if(banco.is_open()) {
                     break;
             case 5: listarSala();
                     break;
-                    case 7: listarParticipante();
+            case 7: listarParticipante();
                     break;
         }
     } while(option != 6);
