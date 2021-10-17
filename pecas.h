@@ -10,9 +10,10 @@
 #include "dominios.h"
 #include "entidades.h"
 
+#include "sessoes.h"
+
 using namespace std;
 
-vector<Peca> pecaVector = {};
 map<string, vector<string>> participantePecaAssociation = {};
 
 void listarPeca() {
@@ -108,7 +109,7 @@ void criarPeca(string inputMatricula) {
    cout << "====================================" << endl;
 }
 
-void procurarPeca(string inputMatricula) {
+void procurarPeca() {
     cout << "Qual peça você gostaria de visualizar" << endl;
     cout << "====================================" << endl;
     cout << "Código: ";
@@ -144,7 +145,7 @@ void procurarPeca(string inputMatricula) {
     cout << "====================================" << endl;
 }
 
-void editarPeca(string inputMatricula) {
+void editarPeca() {
     Nome nome;
     Tipo tipo;
     Classificacao classificacao;
@@ -215,20 +216,13 @@ void editarPeca(string inputMatricula) {
    cout << "====================================" << endl;
 }
 
-void excluirPeca(string inputMatricula) {
-    cout << "Qual peça você gostaria de excluir" << endl;
-    cout << "====================================" << endl;
-    cout << "Codigo: ";
-
-    char inputCodigo[80];
-    cin.ignore();
-    cin.getline(inputCodigo,sizeof(inputCodigo));
+void excluirPeca(string inputCodigoPeca) {
 
     //Verifica se a peça existe
     bool allowAccess = false;
 
     for (auto peca : pecaVector) {
-        if(peca.getCodigo().getValor() == inputCodigo) allowAccess = true;
+        if(peca.getCodigo().getValor() == inputCodigoPeca) allowAccess = true;
     }
 
     if(!allowAccess) {
@@ -239,7 +233,7 @@ void excluirPeca(string inputMatricula) {
     bool found = false;
 
     for(int i = 0; (unsigned)i < pecaVector.size(); i++){
-        if(pecaVector[i].getCodigo().getValor() == inputCodigo) {
+        if(pecaVector[i].getCodigo().getValor() == inputCodigoPeca) {
             found = true;
             pecaVector.erase(pecaVector.begin() + i);
             cout << "Peca excluída com sucesso" << endl;
@@ -247,15 +241,27 @@ void excluirPeca(string inputMatricula) {
         }
     }
 
-    // Apaga peça de participantePecaAssociation
-    for(int i = 0; (unsigned)i < participantePecaAssociation[inputMatricula].size(); i++){
-        if(participantePecaAssociation[inputMatricula][i] == inputCodigo) {
-            //found = true;
-            participantePecaAssociation[inputMatricula].erase(participantePecaAssociation[inputMatricula].begin() + i);
+
+    // Apaga sessoes de pecaSessaoAssociation
+    for(auto x : pecaSessaoAssociation){
+        for(int i = 0; i < x.second.size(); i++) {
+            if(x.first == inputCodigoPeca) {
+                excluirSessao(pecaSessaoAssociation[x.first][i]);
+                pecaSessaoAssociation[x.first].erase(pecaSessaoAssociation[x.first].begin() + i);
+            }
             break;
         }
     }
 
+    // Apaga peças de participantePecaAssociation
+    for(auto x : participantePecaAssociation){
+        for(int i = 0; i < x.second.size(); i++) {
+            if(x.second[i] == inputCodigoPeca) {
+                participantePecaAssociation[x.first].erase(participantePecaAssociation[x.first].begin() + i);
+            }
+            break;
+        }
+    }
     if(!found) cout << "Peça não cadastrada" << endl;
 }
 

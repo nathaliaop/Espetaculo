@@ -10,12 +10,13 @@
 #include "dominios.h"
 #include "entidades.h"
 
-#include "pecas.h"
-
 using namespace std;
 
 vector<Sessao> sessaoVector = {};
+vector<Peca> pecaVector = {};
+vector<Sala> salaVector = {};
 map<string, vector<string>> pecaSessaoAssociation = {};
+map<string, vector<string>> salaSessaoAssociation = {};
 
 void listarSessao() {
     cout << "====================================" << endl;
@@ -33,7 +34,7 @@ void listarSessao() {
     if(!found) cout << "Nenhuma sessão cadastrada" << endl;
 }
 
-void criarSessao(string inputMatricula) {
+void criarSessao() {
     Sessao sessao;
     
     Codigo codigo;
@@ -42,9 +43,10 @@ void criarSessao(string inputMatricula) {
 
     bool found = false;
     char inputCodigoSessao[80], inputData[80], inputHorario[80];
-    char inputCodigoPeca[80];
+    char inputCodigoPeca[80], inputCodigoSala[80];
     cin.ignore();
 
+    //Verifica a relação com peça
     cout << "Insira o código da peça que será apresentada na sessão" << endl;
     cout << "====================================" << endl;
     cout << "Codigo: ";
@@ -64,20 +66,46 @@ void criarSessao(string inputMatricula) {
     }
 
     //Verifica se a peça existe
-    bool allowAccess = false;
+    bool allowAccessPeca = false;
 
     for (auto peca : pecaVector) {
-        if(peca.getCodigo().getValor() == inputCodigoPeca) allowAccess = true;
+        if(peca.getCodigo().getValor() == inputCodigoPeca) allowAccessPeca = true;
     }
 
-    if(!allowAccess) {
+    if(!allowAccessPeca) {
         cout << "Peça não existe" << endl;
         return;
     }
 
 
 
+  //Verifica a relação com sala
+    cout << "Insira o código da sala onde a sessão será exibida" << endl;
+    cout << "====================================" << endl;
+    cout << "Codigo: ";
+    cin.getline(inputCodigoSala,sizeof(inputCodigoSala));
+    try {
+        codigo.setValor(string(inputCodigoSala));
+    }
+    catch(invalid_argument &exp) {
+        cout << "Codigo precisa ter o formato LLDDDD (L são letras maisculas e D são dígitos)" << endl;
+        return;
+    }
 
+    //Verifica se a sala existe
+    bool allowAccessSala = false;
+
+    for (auto sala : salaVector) {
+        if(sala.getCodigo().getValor() == inputCodigoSala) allowAccessSala = true;
+    }
+
+    if(!allowAccessSala) {
+        cout << "Sala não existe" << endl;
+        return;
+    }
+
+
+    // Cria sessão
     cout << "Insira o código da sessao" << endl;
     cout << "====================================" << endl;
     cout << "Codigo: ";
@@ -126,12 +154,13 @@ void criarSessao(string inputMatricula) {
     if(!found) {
         sessaoVector.push_back(sessao);
         pecaSessaoAssociation[inputCodigoPeca].push_back(inputCodigoSessao);
+        salaSessaoAssociation[inputCodigoSala].push_back(inputCodigoSessao);
     }
 
    cout << "====================================" << endl;
 }
 
-void procurarSessao(string inputMatricula) {
+void procurarSessao() {
     cout << "Qual sessão você gostaria de visualizar" << endl;
     cout << "====================================" << endl;
     cout << "Código: ";
@@ -165,7 +194,7 @@ void procurarSessao(string inputMatricula) {
     cout << "====================================" << endl;
 }
 
-void editarSessao(string inputMatricula) {
+void editarSessao() {
     Data data;
     Horario horario;
 
@@ -224,14 +253,7 @@ void editarSessao(string inputMatricula) {
    cout << "====================================" << endl;
 }
 
-void excluirSessao(string inputMatricula) {
-    cout << "Qual sessão você gostaria de excluir" << endl;
-    cout << "====================================" << endl;
-    cout << "Codigo: ";
-
-    char inputCodigoSessao[80];
-    cin.ignore();
-    cin.getline(inputCodigoSessao,sizeof(inputCodigoSessao));
+void excluirSessao(string inputCodigoSessao) {
 
     //Verifica se a sessão existe
     bool allowAccess = false;
@@ -256,11 +278,22 @@ void excluirSessao(string inputMatricula) {
         }
     }
 
-    // Apaga peça de pecaSessaoAssociation
-    for(auto peca : pecaSessaoAssociation){
-        for(int i = 0; i < peca.second.size(); i++) {
-            if(peca.second[i] == inputCodigoSessao)
-            pecaSessaoAssociation[peca.first].erase(pecaSessaoAssociation[peca.first].begin() + i);
+    // Apaga sessão de pecaSessaoAssociation
+    for(auto x : pecaSessaoAssociation){
+        for(int i = 0; i < x.second.size(); i++) {
+            if(x.second[i] == inputCodigoSessao) {
+                pecaSessaoAssociation[x.first].erase(pecaSessaoAssociation[x.first].begin() + i);
+            }
+            break;
+        }
+    }
+
+    // Apaga sessão de salaSessaoAssociation
+    for(auto x : salaSessaoAssociation){
+        for(int i = 0; i < x.second.size(); i++) {
+            if(x.second[i] == inputCodigoSessao) {
+                salaSessaoAssociation[x.first].erase(salaSessaoAssociation[x.first].begin() + i);
+            }
             break;
         }
     }

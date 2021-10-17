@@ -10,22 +10,22 @@ using namespace std;
 
 class Capacidade {
     private:
-        int capacidade;
-        void validar(int);
+        string capacidade;
+        void validar(string);
     public:
-        void setValor(int capacidade);
-        int getValor();
+        void setValor(string capacidade);
+        string getValor();
 };//Feito por -> 180116207
 
-inline int Capacidade::getValor() {
+inline string Capacidade::getValor() {
     return capacidade;
 }//Feito por -> 180116207
-void Capacidade::validar(int capacidade){
-    if(capacidade != 100 && capacidade != 200 && capacidade != 300 &&
-       capacidade != 400 && capacidade != 500)
+void Capacidade::validar(string capacidade){
+    if(capacidade != "100" && capacidade != "200" && capacidade != "300" &&
+       capacidade != "400" && capacidade != "500")
         throw invalid_argument("Argumento Invalido!");
 }//Feito por -> 180116207
-void Capacidade::setValor(int capacidade){
+void Capacidade::setValor(string capacidade){
     validar(capacidade);
     this->capacidade = capacidade;
 }//Feito por -> 180116207
