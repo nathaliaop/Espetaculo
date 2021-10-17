@@ -14,7 +14,6 @@
 
 using namespace std;
 
-
 void listarSala() {
     cout << "====================================" << endl;
     bool found = false;
@@ -127,6 +126,32 @@ void procurarSala() {
     cout << "Nome: " << nome << endl;
     cout << "Capacidade: " << capacidade << endl;
     cout << "====================================" << endl;
+}
+
+string salaToString(string codigo)  {
+    for (auto sala : salaVector) {
+        if(sala.getCodigo().getValor() == codigo) {
+            return codigo + ";" + sala.getNome().getValor() + ";" + sala.getCapacidade().getValor();
+        }
+    }
+    
+    return "";
+}
+
+Sala stringToSala(string linha) {
+    vector<string> parametros = split(linha, ';');
+
+    Sala sala;
+
+    Codigo codigo; codigo.setValor(parametros[0]);
+    Nome nome; nome.setValor(parametros[1]);
+    Capacidade capacidade; capacidade.setValor(parametros[2]);
+
+    sala.setCodigo(codigo);
+    sala.setNome(nome);
+    sala.setCapacidade(capacidade);
+
+    return sala;
 }
 
 void editarSala() {

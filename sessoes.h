@@ -12,11 +12,11 @@
 
 using namespace std;
 
-vector<Sessao> sessaoVector = {};
-vector<Peca> pecaVector = {};
-vector<Sala> salaVector = {};
-map<string, vector<string>> pecaSessaoAssociation = {};
-map<string, vector<string>> salaSessaoAssociation = {};
+vector<Sessao> sessaoVector;
+vector<Peca> pecaVector;
+vector<Sala> salaVector;
+map<string, vector<string>> pecaSessaoAssociation;
+map<string, vector<string>> salaSessaoAssociation;
 
 void listarSessao() {
     cout << "====================================" << endl;
@@ -192,6 +192,32 @@ void procurarSessao() {
     cout << "Data: " << data << endl;
     cout << "Horario: " << horario << endl;
     cout << "====================================" << endl;
+}
+
+string sessaoToString(string codigo) {
+    for (auto sessao : sessaoVector) {
+        if(sessao.getCodigo().getValor() == codigo) {
+            return codigo + ";" + sessao.getData().getValor() + ";" + sessao.getHorario().getValor();
+        }
+    }
+
+    return "";
+}
+
+Sessao stringToSessao(string linha) {
+    vector<string> parametros = split(linha, ';');
+
+    Sessao sessao;
+    
+    Codigo codigo; codigo.setValor(parametros[0]);
+    Data data; data.setValor(parametros[1]);
+    Horario horario; horario.setValor(parametros[2]);
+
+    sessao.setCodigo(codigo);
+    sessao.setData(data);
+    sessao.setHorario(horario);
+
+    return sessao;
 }
 
 void editarSessao() {
