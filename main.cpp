@@ -8,12 +8,20 @@
 #include "entidades.h"
 
 #include "participantes.h"
+#include "database.h" // teste
+#include <vector> // teste
 
 using namespace std;
 
 int main() {
 
     int option;
+        Database database;
+        vector<Participante, vector<Peca, vector<Sessao, vector<Sala>>>> dados = database.carregarArquivo();
+
+        
+
+        return 0;
 
     do {
         cout << "1 - Acessar sistema" << endl;
