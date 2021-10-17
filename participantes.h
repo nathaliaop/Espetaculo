@@ -17,21 +17,20 @@
 using namespace std;
 
 vector<Participante> participanteVector = {};
-map<string,vector<string>> cadastroParticipantePeca = {};
 
 void cadastrarParticipantePeca(string inputMatricula) {
-    /*cout << "Em qual peça você gostaria de se cadastrar" << endl;
+    cout << "Em qual peça você gostaria de se cadastrar" << endl;
     cout << "====================================" << endl;
     cout << "Código: ";
-    char inputCodigo[80];
+    char inputCodigoPeca[80];
     cin.ignore();
-    cin.getline(inputCodigo,sizeof(inputCodigo));
+    cin.getline(inputCodigoPeca,sizeof(inputCodigoPeca));
 
     //Verifica se a peça existe
     bool allowAccess = false;
 
     for (auto peca : pecaVector) {
-        if(peca.getCodigo().getValor() == inputCodigo) allowAccess = true;
+        if(peca.getCodigo().getValor() == inputCodigoPeca) allowAccess = true;
     }
 
     if(!allowAccess) {
@@ -40,18 +39,20 @@ void cadastrarParticipantePeca(string inputMatricula) {
     }
 
     // Verifica se usuário já está cadastrado na peça
-    for (auto participante : cadastroParticipantePeca[inputCodigo]) {
+    for (auto participante : cadastroParticipantePeca[inputCodigoPeca]) {
         if(participante == inputMatricula) {
             cout << "Você já está cadastrado nessa peça" << endl;
             return;
         }
     }
 
-    if(cadastroParticipantePeca[inputCodigo] == 10) {
-        cout << "Está peça já está lotada"
+    if(cadastroParticipantePeca[inputCodigoPeca].size() == 10) {
+        cout << "Está peça já está lotada" << endl;
+        return;
     }
 
-    cadastroParticipantePeca[inputCodigo].pb(inputMatricula);*/
+    cadastroParticipantePeca[inputCodigoPeca].push_back(inputMatricula);
+    cout << "Cadastro realizado com sucesso" << endl;
 }
 
 void criarParticipante() {
@@ -158,18 +159,6 @@ void criarParticipante() {
    cout << "====================================" << endl;
 }
 
-//Função para teste
-void listarParticipante() {
-    bool found = false;
-    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
-        cout << participanteVector[i].getMatricula().getValor() << endl;
-            found = true;
-    }
-    if(!found) cout << "No participants" << endl;
-}
-
-
-//Função para tests
 void visualizarDadosPessoais(string inputMatricula) {
     string nome, sobrenome, email, telefone, senha, cargo;
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
@@ -287,6 +276,16 @@ void excluirParticipante(string inputMatricula) {
         if(participanteVector[i].getMatricula().getValor() == inputMatricula) {
             participanteVector.erase(participanteVector.begin() + i);
             cout << "Cadastro excluído com sucesso" << endl;
+            break;
+        }
+    }
+
+    // Apaga cadastro do participante de cadastroParticipantePeca
+    for(auto x : cadastroParticipantePeca){
+        for(int i = 0; i < x.second.size(); i++) {
+            if(x.second[i] == inputMatricula) {
+                cadastroParticipantePeca[x.first].erase(cadastroParticipantePeca[x.first].begin() + i);
+            }
             break;
         }
     }

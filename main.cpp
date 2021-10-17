@@ -22,7 +22,6 @@ int main() {
         cout << "4 - Listar sessões" << endl;
         cout << "5 - Listar salas" << endl;
         cout << "6 - Sair do sistema" << endl;
-        cout << "7 - Listar participantes" << endl;
         cout << "Selecione a opção >> ";
 
         cin >> option;
@@ -37,8 +36,6 @@ int main() {
             case 4: listarSessao();
                     break;
             case 5: listarSala();
-                    break;
-            case 7: listarParticipante();
                     break;
         }
     } while(option != 6);

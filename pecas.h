@@ -15,6 +15,7 @@
 using namespace std;
 
 map<string, vector<string>> participantePecaAssociation = {};
+map<string,vector<string>> cadastroParticipantePeca = {};
 
 void listarPeca() {
     cout << "====================================" << endl;
@@ -241,6 +242,8 @@ void excluirPeca(string inputCodigoPeca) {
         }
     }
 
+    //Apaga cadastros na peça
+    cadastroParticipantePeca[inputCodigoPeca] = {};
 
     // Apaga sessoes de pecaSessaoAssociation
     for(auto x : pecaSessaoAssociation){
