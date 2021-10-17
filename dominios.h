@@ -15,6 +15,7 @@ class Capacidade {
     public:
         void setValor(string capacidade);
         string getValor();
+    
 };//Feito por -> 180116207
 
 inline string Capacidade::getValor() {

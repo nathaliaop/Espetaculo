@@ -54,8 +54,4 @@ inline vector<Participante, vector<Peca, vector<Sessao, vector<Sala>>>> carregar
     return v;
 }
 
-/*
-pq nao tem construtor bixo
-*/
-
 #endif // DATABASE_H_INCLUDED
