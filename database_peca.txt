@@ -1,0 +1,8 @@
+AB1234;Nathalia;farsa;livre
+0
+AB2345;NATHALIA;farsa;livre
+0
+AB3456;NATHALIA;farsa;livre
+0
+CD1234;NATHALIA;farsa;livre
+0

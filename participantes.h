@@ -345,6 +345,108 @@ void excluirParticipante(string inputMatricula) {
 
 }
 
+void participanteAutenticadoPeca(string inputMatricula){
+    int option;
+    do {
+        cout << "1 - Criar peça" << endl;
+        cout << "2 - Procurar peça" << endl;
+        cout << "3 - Editar peça" << endl;
+        cout << "4 - Excluir peça" << endl;
+        cout << "5 - Listar peças" << endl;
+        cout << "6 - Retorna à tela anterior" << endl;
+        cout << "Selecione a opção >> ";
+
+        cin >> option;
+
+        switch(option) {
+            case 1: criarPeca(inputMatricula);
+                    break;
+            case 2: procurarPeca();
+                    break;
+            case 3: editarPeca();
+                    break;
+            case 4: cout << "Qual peça você gostaria de excluir" << endl;
+                    cout << "====================================" << endl;
+                    cout << "Codigo: ";
+                    char inputCodigoPeca[80];
+                    cin.ignore();
+                    cin.getline(inputCodigoPeca,sizeof(inputCodigoPeca));
+                    excluirPeca(inputCodigoPeca);
+                    break;
+            case 5: listarPeca();
+                    break;
+        }
+    } while(option != 6);
+}
+
+void participanteAutenticadoSala(string inputMatricula){
+    int option;
+    do {
+        cout << "1 - Criar sala" << endl;
+        cout << "2 - Procurar sala" << endl;
+        cout << "3 - Editar sala" << endl;
+        cout << "4 - Excluir sala" << endl;
+        cout << "5 - Listar salas" << endl;
+        cout << "6 - Retorna à tela anterior" << endl;
+        cout << "Selecione a opção >> ";
+
+        cin >> option;
+
+        switch(option) {
+            case 1: criarSala();
+                    break;
+            case 2: procurarSala();
+                    break;
+            case 3: editarSala();
+                    break;
+            case 4: cout << "Qual sala você gostaria de excluir" << endl;
+                    cout << "====================================" << endl;
+                    cout << "Codigo: ";
+                    char inputCodigoSala[80];
+                    cin.ignore();
+                    cin.getline(inputCodigoSala,sizeof(inputCodigoSala));
+                    excluirSala(inputCodigoSala);
+                    break;
+            case 5: listarSala();
+                    break;
+        }
+    } while(option != 6);
+}
+
+void participanteAutenticadoSessao(string inputMatricula){
+    int option;
+    do {
+        cout << "1 - Criar sessão" << endl;
+        cout << "2 - Procurar sessão" << endl;
+        cout << "3 - Editar sessão" << endl;
+        cout << "4 - Excluir sessão" << endl;
+        cout << "5 - Listar sessões" << endl;
+        cout << "6 - Retorna à tela anterior" << endl;
+        cout << "Selecione a opção >> ";
+
+        cin >> option;
+
+        switch(option) {
+            case 1: criarSessao();
+                    break;
+            case 2: procurarSessao();
+                    break;
+            case 3: editarSessao();
+                    break;
+            case 4: cout << "Qual sessão você gostaria de excluir" << endl;
+                    cout << "====================================" << endl;
+                    cout << "Codigo: ";
+                    char inputCodigoSessao[80];
+                    cin.ignore();
+                    cin.getline(inputCodigoSessao,sizeof(inputCodigoSessao));
+                    excluirSessao(inputCodigoSessao);
+                    break;
+            case 5: listarSessao();
+                    break;
+        }
+    } while(option != 6);
+}
+
 void participanteAutenticado(string inputMatricula){
     int option;
     do {
@@ -352,23 +454,11 @@ void participanteAutenticado(string inputMatricula){
         cout << "1 - Visualizar dados pessoais" << endl;
         cout << "2 - Editar dados pessoais" << endl;
         cout << "3 - Excluir cadastro no sistema" << endl;
-        cout << "4 - Criar peça" << endl;
-        cout << "5 - Procurar peça" << endl;
-        cout << "6 - Editar peça" << endl;
-        cout << "7 - Excluir peça" << endl;
-        cout << "8 - Criar sessão" << endl;
-        cout << "9 - Procurar sessão" << endl;
-        cout << "10 - Editar sessão" << endl;
-        cout << "11 - Excluir sessão" << endl;
-        cout << "12 - Criar sala" << endl;
-        cout << "13 - Procurar sala" << endl;
-        cout << "14 - Editar sala" << endl;
-        cout << "15 - Excluir sala" << endl;
-        cout << "16 - Listar peças" << endl;
-        cout << "17 - Listar sessões" << endl;
-        cout << "18 - Listar salas" << endl;
-        cout << "19 - Cadastrar-se como participante da peça" << endl;
-        cout << "20 - Retorna à tela inicial" << endl;
+        cout << "4 - Cadastrar-se como participante da peça" << endl;
+        cout << "5 - Ir para página de peças" << endl;
+        cout << "6 - Ir para página de salas" << endl;
+        cout << "7 - Ir para página de sessões" << endl;
+        cout << "8 - Retornar à tela inicial" << endl;
         cout << "Selecione a opção >> ";
 
         cin >> option;
@@ -380,58 +470,16 @@ void participanteAutenticado(string inputMatricula){
                     break;
             case 3: excluirParticipante(inputMatricula);
                     break;
-            case 4: criarPeca(inputMatricula);
+            case 4: cadastrarParticipantePeca(inputMatricula);
                     break;
-            case 5: procurarPeca();
+            case 5: participanteAutenticadoPeca(inputMatricula);
                     break;
-            case 6: editarPeca();
+            case 6: participanteAutenticadoSala(inputMatricula);
                     break;
-            case 7: cout << "Qual peça você gostaria de excluir" << endl;
-                    cout << "====================================" << endl;
-                    cout << "Codigo: ";
-                    char inputCodigoPeca[80];
-                    cin.ignore();
-                    cin.getline(inputCodigoPeca,sizeof(inputCodigoPeca));
-                    excluirPeca(inputCodigoPeca);
-                    break;
-            case 8: criarSessao();
-                    break;
-            case 9: procurarSessao();
-                    break;
-            case 10: editarSessao();
-                    break;
-            case 11:cout << "Qual sessão você gostaria de excluir" << endl;
-                    cout << "====================================" << endl;
-                    cout << "Codigo: ";
-                    char inputCodigoSessao[80];
-                    cin.ignore();
-                    cin.getline(inputCodigoSessao,sizeof(inputCodigoSessao)); 
-                    excluirSessao(inputCodigoSessao);
-                    break;
-            case 12: criarSala();
-                    break;
-            case 13: procurarSala();
-                    break;
-            case 14: editarSala();
-                    break;
-            case 15:cout << "Qual sala você gostaria de excluir" << endl;
-                    cout << "====================================" << endl;
-                    cout << "Codigo: ";
-                    char inputCodigoSala[80];
-                    cin.ignore();
-                    cin.getline(inputCodigoSala,sizeof(inputCodigoSala)); 
-                    excluirSala(inputCodigoSala);
-                    break;
-            case 16: listarPeca();
-                    break;
-            case 17: listarSessao();
-                    break;
-            case 18: listarSala();
-                    break;
-            case 19: cadastrarParticipantePeca(inputMatricula);
+            case 7: participanteAutenticadoSessao(inputMatricula);
                     break;
         }
-    } while(option != 20 && option != 3);
+    } while(option != 8 && option != 3);
 }
 
 void autenticarParticipante() {
