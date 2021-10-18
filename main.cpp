@@ -8,8 +8,7 @@
 #include "entidades.h"
 
 #include "participantes.h"
-#include "database.h" // teste
-#include <vector> // teste
+#include "database.h"
 
 using namespace std;
 
