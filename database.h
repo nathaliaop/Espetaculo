@@ -54,6 +54,7 @@ inline void Database::armazenarBancoDeDados() {
 
     for (Peca peca : pecaVector) {
         string codigoPeca = peca.getCodigo().getValor();
+        FilePeca << pecaToString(peca.getCodigo().getValor()) << '\n';
 
         FilePeca << pecaSessaoAssociation[codigoPeca].size() << '\n';
         for (string codigoSessao : pecaSessaoAssociation[codigoPeca]) {
@@ -166,12 +167,12 @@ inline void Database::carregarBancoDeDados() {
         salaVector.push_back(sala);
 
         string linhaQntSessoes;
-        getline(ReadFilePeca, linhaQntSessoes);
+        getline(ReadFileSala, linhaQntSessoes);
 
         int qntSessoes = stoi(linhaQntSessoes);
         for (int i = 0; i < qntSessoes; i++) {
             string linhaSessao;
-            getline(ReadFilePeca, linhaSessao);
+            getline(ReadFileSala, linhaSessao);
             
             Sessao sessao = stringToSessao(linhaSessao);
 
