@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <vector>
-#include <iostream> // teste
 
 #include "entidades.h"
 
@@ -132,7 +131,7 @@ inline void Database::carregarBancoDeDados() {
     }
     
     ReadFileParticipante.close();
-
+    
     // pecas
     ifstream ReadFilePeca("database_peca.txt");
 
@@ -157,7 +156,7 @@ inline void Database::carregarBancoDeDados() {
     }
 
     ReadFilePeca.close();
-
+    
     // salas
     ifstream ReadFileSala("database_sala.txt");
 
@@ -182,7 +181,7 @@ inline void Database::carregarBancoDeDados() {
     }
 
     ReadFileSala.close();
-
+    
     // sessoes
     ifstream ReadFileSessao("database_sessao.txt");
 
@@ -194,25 +193,21 @@ inline void Database::carregarBancoDeDados() {
     }
 
     ReadFileSessao.close();
-
+    
     // cadastroParticipantePeca
     ifstream ReadFileParticipantePeca("database_participantePeca.txt");
 
-    string linhaParticipantePeca;
-    while (getline(ReadFileParticipantePeca, linhaParticipantePeca)) {
-        Peca peca = stringToPeca(linhaParticipantePeca);
-
+    string codigoPeca;
+    while (getline(ReadFileParticipantePeca, codigoPeca)) {
         string linhaQntParticipantes;
         getline(ReadFileParticipantePeca, linhaQntParticipantes);
 
         int qntParticipantes = stoi(linhaQntParticipantes);
         for (int i = 0; i < qntParticipantes; i++) {
-            string linhaParticipante;
-            getline(ReadFileParticipantePeca, linhaParticipante);
-            
-            Participante participante = stringToParticipante(linhaParticipante);
+            string matriculaParticipante;
+            getline(ReadFileParticipantePeca, matriculaParticipante);
 
-            cadastroParticipantePeca[peca.getCodigo().getValor()].push_back(participante.getMatricula().getValor());
+            cadastroParticipantePeca[codigoPeca].push_back(matriculaParticipante);
         }
     }
 
