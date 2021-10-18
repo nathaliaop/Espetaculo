@@ -1,3 +1,5 @@
 12345;Victor;Manuel;victor@gmail.com;(61)-998282689;#Senha12;ator
 1
 AB1234;Salabrito;farsa;livre
+23456;Natalia;Pereira;nataliapereira@gmail.com;(61)-998282689;#Senha12;ator
+0
