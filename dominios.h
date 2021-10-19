@@ -15,20 +15,21 @@ class Capacidade {
     public:
         void setValor(string capacidade);
         string getValor();
-};//Feito por -> 180116207
+
+};//Feito por -> 180042980
 
 inline string Capacidade::getValor() {
     return capacidade;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Capacidade::validar(string capacidade){
     if(capacidade != "100" && capacidade != "200" && capacidade != "300" &&
        capacidade != "400" && capacidade != "500")
         throw invalid_argument("Argumento Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Capacidade::setValor(string capacidade){
     validar(capacidade);
     this->capacidade = capacidade;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 
 class Cargo{
@@ -38,19 +39,19 @@ class Cargo{
     public:
         void setValor(string cargo);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Cargo::getValor(){
     return cargo;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Cargo::validar(string cargo){
     if(cargo !="ator" && cargo !="cenografo" && cargo !="figurinista" &&
        cargo !="maquiador" && cargo !="sonoplasta" && cargo !="iluminador")
         throw invalid_argument("Argumento Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Cargo::setValor(string cargo){
     validar(cargo);
     this->cargo = cargo;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 
 class Classificacao{
@@ -60,15 +61,15 @@ class Classificacao{
     public:
         void setValor(string classificacao);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Classificacao::getValor(){
     return classificacao;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Classificacao::validar(string classificacao){
     if(classificacao !="livre" && classificacao !="10" && classificacao !="12" &&
        classificacao !="14" && classificacao !="16" && classificacao !="18")
        throw invalid_argument("Argumento Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Classificacao::setValor(string classificacao){
     validar(classificacao);
     this->classificacao = classificacao;
@@ -82,10 +83,10 @@ class Codigo {
     public:
         void setValor(string codigo);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Codigo::getValor() {
     return codigo;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Codigo::validar(string codigo) {
     //LLDDDD
     StringUtils xx(codigo);
@@ -113,21 +114,21 @@ class Data{
     public:
         void setValor(string data);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Data::getValor(){
     return data;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Data::validar(string data){
     DataUtils xx(data);
     if(data.size() != 10)
         throw invalid_argument("Tamanho Invalido!");
     if(!xx.isValid() || !xx.isDataInForm())
         throw invalid_argument("Data Invalida!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Data::setValor(string data){
     validar(data);
     this->data = data;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 //Consertar validação de email
 class Email {
@@ -137,10 +138,10 @@ private:
 public:
     void setValor(string email);
     string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Email::getValor(){
     return email;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Email::validar(string email){
     StringUtils xx (email);
     if (!xx.hasAt())
@@ -166,10 +167,10 @@ class Horario{
     public:
         void setValor(string horario);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Horario::getValor(){
     return horario;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Horario::validar(string horario){
     StringUtils xx(horario);
     if(xx.size() != 5)
@@ -185,11 +186,11 @@ void Horario::validar(string horario){
         throw invalid_argument("Hora Invalida!");
     if(!xxM.equalsTo("00") && !xxM.equalsTo("15") && !xxM.equalsTo("30") && !xxM.equalsTo("45"))
         throw invalid_argument("Minuto Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Horario::setValor(string horario){
     validar(horario);
     this->horario=horario;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 
 class Nome {
@@ -199,10 +200,10 @@ private:
 public:
     void setValor(string nome);
     string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Nome::getValor(){
     return nome;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Nome::validar(string nome){
     StringUtils xx(nome);
     if (xx.size() < 5 || xx.size() > 20)
@@ -226,10 +227,10 @@ private:
 public:
     void setValor(string matricula);
     string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Matricula::getValor(){
     return matricula;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Matricula::validar(string matricula) {
     StringUtils xx(matricula);
     if(xx.size() != 5)
@@ -242,7 +243,7 @@ void Matricula::validar(string matricula) {
 inline void Matricula::setValor(string matricula){
         validar(matricula);
     this -> matricula = matricula;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 
 class Senha {
@@ -252,7 +253,7 @@ class Senha {
     public:
         void setValor(string senha);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Senha::getValor() {
     return senha;
 }
@@ -280,10 +281,10 @@ class Telefone {
     public:
         void setValor(string telefone);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Telefone::getValor() {
     return telefone;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Telefone::validar(string telefone){
     StringUtils xx (telefone);
     if(xx.size() != 14)
@@ -307,11 +308,11 @@ void Telefone::validar(string telefone){
        !xxDDD.equalsTo("81") && !xxDDD.equalsTo("82") && !xxDDD.equalsTo("83") && !xxDDD.equalsTo("84") && !xxDDD.equalsTo("85") && !xxDDD.equalsTo("86") && !xxDDD.equalsTo("87") && !xxDDD.equalsTo("88") && !xxDDD.equalsTo("89") &&
        !xxDDD.equalsTo("91") && !xxDDD.equalsTo("92") && !xxDDD.equalsTo("93") && !xxDDD.equalsTo("94") && !xxDDD.equalsTo("95") && !xxDDD.equalsTo("96") && !xxDDD.equalsTo("97") && !xxDDD.equalsTo("98") && !xxDDD.equalsTo("99"))
         throw invalid_argument("DDD Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Telefone::setValor(string telefone){
     validar(telefone);
     this->telefone = telefone;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 
 class Tipo {
@@ -321,19 +322,19 @@ class Tipo {
     public:
         void setValor(string tipo);
         string getValor();
-};//Feito por -> 180116207
+};//Feito por -> 180042980
 inline string Tipo::getValor() {
     return tipo;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Tipo::validar(string tipo){
     if(tipo != "auto" && tipo != "comédia" && tipo != "drama" && tipo != "farsa" &&
        tipo != "melodrama" && tipo != "monólogo" && tipo != "musical" && tipo != "ópera" &&
        tipo != "revista" )
         throw invalid_argument("Argumento Invalido!");
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 void Tipo::setValor(string tipo){
     validar(tipo);
     this->tipo = tipo;
-}//Feito por -> 180116207
+}//Feito por -> 180042980
 
 #endif // DOMINIOS_H_INCLUDED

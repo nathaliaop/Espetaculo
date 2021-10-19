@@ -9,6 +9,7 @@
 
 #include "dominios.h"
 #include "entidades.h"
+#include "utils.h"
 
 #include "pecas.h"
 #include "salas.h"
@@ -16,7 +17,7 @@
 
 using namespace std;
 
-vector<Participante> participanteVector = {};
+vector<Participante> participanteVector;
 
 void cadastrarParticipantePeca(string inputMatricula) {
     cout << "Em qual peça você gostaria de se cadastrar" << endl;
@@ -181,6 +182,47 @@ void visualizarDadosPessoais(string inputMatricula) {
     cout << "Senha: " << senha << endl;
     cout << "Cargo: " << cargo << endl;
     cout << "====================================" << endl;
+}
+
+string participanteToString(string matricula) {
+    string nome, sobrenome, email, telefone, senha, cargo;
+    for(int i = 0; (unsigned)i < participanteVector.size(); i++){
+       if(participanteVector[i].getMatricula().getValor() == matricula) {
+            nome = participanteVector[i].getNome().getValor();
+            sobrenome = participanteVector[i].getSobrenome().getValor();
+            email = participanteVector[i].getEmail().getValor();
+            telefone = participanteVector[i].getTelefone().getValor();
+            senha = participanteVector[i].getSenha().getValor();
+            cargo = participanteVector[i].getCargo().getValor();
+            break;
+        }
+    }
+
+    return matricula + ";" + nome + ";" + sobrenome + ";" + email + ";" + telefone + ";" + senha + ";" + cargo;
+}
+
+Participante stringToParticipante(string linha) {
+    vector<string> parametros = split(linha, ';');
+
+    Participante participante;
+    
+    Matricula matricula; matricula.setValor(parametros[0]);
+    Nome nome; nome.setValor(parametros[1]);
+    Nome sobrenome; sobrenome.setValor(parametros[2]);
+    Email email; email.setValor(parametros[3]);
+    Telefone telefone; telefone.setValor(parametros[4]);
+    Senha senha; senha.setValor(parametros[5]);
+    Cargo cargo; cargo.setValor(parametros[6]);
+
+    participante.setMatricula(matricula);
+    participante.setNome(nome);
+    participante.setSobrenome(sobrenome);
+    participante.setEmail(email);
+    participante.setTelefone(telefone);
+    participante.setSenha(senha);
+    participante.setCargo(cargo);
+
+    return participante;
 }
 
 void editarDadosPessoais(string inputMatricula) {
@@ -424,7 +466,7 @@ void autenticarParticipante() {
 
     bool foundMatricula = false;
     bool foundSenha = false;
-
+    
     for(int i = 0; (unsigned)i < participanteVector.size(); i++){
        if(participanteVector[i].getMatricula().getValor() == participante.getMatricula().getValor()) {
            foundMatricula = true;

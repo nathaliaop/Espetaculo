@@ -14,8 +14,8 @@
 
 using namespace std;
 
-map<string, vector<string>> participantePecaAssociation = {};
-map<string,vector<string>> cadastroParticipantePeca = {};
+map<string, vector<string>> participantePecaAssociation;
+map<string, vector<string>> cadastroParticipantePeca;
 
 void listarPeca() {
     cout << "====================================" << endl;
@@ -144,6 +144,34 @@ void procurarPeca() {
     cout << "Tipo: " << tipo << endl;
     cout << "Classificação: " << classificacao << endl;
     cout << "====================================" << endl;
+}
+
+string pecaToString(string codigo) {
+    for (auto peca : pecaVector) {
+        if(peca.getCodigo().getValor() == codigo) {
+            return codigo + ";" + peca.getNome().getValor() + ";" + peca.getTipo().getValor() + ";" + peca.getClassificacao().getValor();
+        }
+    }
+
+    return "";
+}
+
+Peca stringToPeca(string linha) {
+    vector<string> parametros = split(linha, ';');
+
+    Peca peca;
+    
+    Codigo codigo; codigo.setValor(parametros[0]);
+    Nome nome; nome.setValor(parametros[1]);
+    Tipo tipo; tipo.setValor(parametros[2]);
+    Classificacao classificacao; classificacao.setValor(parametros[3]);
+
+    peca.setCodigo(codigo);
+    peca.setNome(nome);
+    peca.setTipo(tipo);
+    peca.setClassificacao(classificacao);
+
+    return peca;
 }
 
 void editarPeca() {

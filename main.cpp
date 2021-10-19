@@ -8,12 +8,16 @@
 #include "entidades.h"
 
 #include "participantes.h"
+#include "database.h" // teste
+#include <vector> // teste
 
 using namespace std;
 
 int main() {
 
     int option;
+    Database database;
+    database.carregarBancoDeDados();
 
     do {
         cout << "1 - Acessar sistema" << endl;
@@ -39,4 +43,6 @@ int main() {
                     break;
         }
     } while(option != 6);
+
+    database.armazenarBancoDeDados();
 }
